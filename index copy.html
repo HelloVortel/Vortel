@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VORTEL — Geopolitical Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#040810;--bg2:#070c18;--bg3:#0b1220;
+  --a:#00e5ff;--a2:#7b2fff;--a3:#ff2d55;
+  --green:#00ff88;--yellow:#ffd700;--orange:#ff6b00;
+  --ln:rgba(0,229,255,.13);--dim:rgba(200,216,232,.44);
+  --text:#c8d8e8;--glow:0 0 18px rgba(0,229,255,.28);
+  --land:#0e1f34;--land2:#162840;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:crosshair}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);pointer-events:none;z-index:9997}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.032) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+#sb{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--a2),var(--a));box-shadow:var(--glow);z-index:9999;width:0}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:.95rem 2.5rem;border-bottom:1px solid var(--ln);background:rgba(4,8,16,.93);backdrop-filter:blur(16px)}
+.nlogo{font-family:'Share Tech Mono',monospace;font-size:1.15rem;color:var(--a);letter-spacing:.32em;text-decoration:none;text-shadow:var(--glow)}
+.nlogo small{display:block;font-size:.5rem;color:var(--dim);letter-spacing:.42em;margin-top:-2px}
+.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks a{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);text-decoration:none;letter-spacing:.2em;transition:color .2s;position:relative;padding-bottom:2px}
+.nlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--a);transition:width .3s}
+.nlinks a:hover{color:var(--a)}.nlinks a:hover::after{width:100%}
+.nlive{font-family:'Share Tech Mono',monospace;font-size:.56rem;color:var(--dim);display:flex;align-items:center;gap:.5rem}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hbg span{width:22px;height:1px;background:var(--a)}
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 4rem;z-index:1;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.o1{width:800px;height:800px;background:radial-gradient(circle,rgba(0,229,255,.055),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:od 12s ease-in-out infinite alternate}
+.o2{width:380px;height:380px;background:radial-gradient(circle,rgba(123,47,255,.1),transparent 70%);top:10%;right:5%;animation:od2 14s ease-in-out infinite alternate}
+.o3{width:280px;height:280px;background:radial-gradient(circle,rgba(255,45,85,.07),transparent 70%);bottom:15%;left:5%;animation:od 9s ease-in-out infinite alternate-reverse}
+@keyframes od{from{transform:translate(-50%,-50%)}to{transform:translate(calc(-50% + 50px),calc(-50% - 25px))}}
+@keyframes od2{from{transform:translate(0,0)}to{transform:translate(-25px,35px)}}
+.eyebrow{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--a);letter-spacing:.5em;margin-bottom:1.5rem;opacity:0;animation:up .8s .3s forwards}
+.hl{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(5rem,15vw,12rem);line-height:.88;letter-spacing:-.02em;color:#fff;text-shadow:0 0 100px rgba(0,229,255,.14);opacity:0;animation:up .8s .5s forwards}
+.hl .ac{color:var(--a)}
+.tgl{font-family:'Exo 2',sans-serif;font-weight:100;font-size:clamp(.8rem,1.8vw,1.1rem);color:var(--dim);letter-spacing:.3em;margin-top:1.5rem;max-width:540px;opacity:0;animation:up .8s .8s forwards}
+.hline{width:1px;height:70px;background:linear-gradient(to bottom,var(--a),transparent);margin:2.5rem auto 2rem;opacity:0;animation:up .8s 1s forwards;box-shadow:var(--glow)}
+.hstats{display:flex;gap:3rem;opacity:0;animation:up .8s 1.2s forwards}
+.hs .n{font-family:'Share Tech Mono',monospace;font-size:1.8rem;color:var(--a);display:block;text-shadow:var(--glow)}
+.hs .l{font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:.28em;color:var(--dim)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+/* SECTIONS */
+section{position:relative;z-index:1}
+.wrap{max-width:1320px;margin:0 auto;padding:0 2.5rem}
+.sh{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+.stag{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--a);letter-spacing:.4em;border:1px solid var(--ln);padding:.22rem .65rem;background:rgba(0,229,255,.04);white-space:nowrap}
+.sr{flex:1;height:1px;background:linear-gradient(to right,var(--ln),transparent)}
+.stitle{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin-bottom:.4rem}
+.stitle span{color:var(--a)}
+/* ABOUT */
+#about{padding:7rem 0}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.atext p{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.93rem;line-height:1.85;color:var(--dim);margin-bottom:1.4rem}
+.atext strong{color:var(--text);font-weight:400}
+.acards{display:flex;flex-direction:column;gap:.8rem}
+.acard{border:1px solid var(--ln);background:linear-gradient(135deg,rgba(0,229,255,.022),transparent);padding:1.1rem 1.4rem;position:relative;overflow:hidden;transition:border-color .3s,transform .25s}
+.acard::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--a);opacity:.5}
+.acard:hover{border-color:rgba(0,229,255,.35);transform:translateX(4px)}
+.act{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--a);letter-spacing:.3em;margin-bottom:.3rem}
+.acb{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.86rem;color:var(--dim)}
+/* MAP */
+#map{padding:5rem 0}
+.mwrap{border:1px solid var(--ln);position:relative;overflow:hidden;background:#020810;box-shadow:0 0 60px rgba(0,229,255,.06),inset 0 0 80px rgba(0,0,0,.5)}
+.mbar{display:flex;align-items:center;justify-content:space-between;padding:.72rem 1.5rem;border-bottom:1px solid var(--ln);background:rgba(0,0,0,.55);z-index:3;position:relative}
+.mbarl{font-family:'Share Tech Mono',monospace;font-size:.54rem;color:var(--dim);letter-spacing:.13em}
+.bdots{display:flex;gap:.35rem}
+.bd{width:8px;height:8px;border-radius:50%}
+.bd:nth-child(1){background:#ff2d55;box-shadow:0 0 5px #ff2d55}
+.bd:nth-child(2){background:#ffd700;box-shadow:0 0 5px #ffd700}
+.bd:nth-child(3){background:var(--green);box-shadow:0 0 5px var(--green)}
+/* MAP SVG */
+.msvgwrap{position:relative;z-index:2;background:linear-gradient(180deg,#020810 0%,#030d18 50%,#020810 100%)}
+#wmap{width:100%;height:auto;display:block}
+.ocean{fill:#040e1e;stroke:none;cursor:default!important}
+.geo{stroke:rgba(0,229,255,.06);stroke-width:.4;fill:none;stroke-dasharray:2,8}
+#wmap path{
+  fill:#0b1929;
+  stroke:#2a6090;
+  stroke-width:1px;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+  transition:fill .15s,stroke .15s,filter .15s;
+  cursor:pointer;
+  vector-effect:non-scaling-stroke;
+  paint-order:stroke fill;
+}
+#wmap path:hover{
+  fill:#1a4060;
+  stroke:#00e5ff;
+  stroke-width:1.5px;
+  filter:drop-shadow(0 0 6px rgba(0,229,255,.6));
+  z-index:10;
+}
+#wmap path.active{
+  fill:#1a5080;
+  stroke:#00e5ff;
+  stroke-width:2px;
+  filter:drop-shadow(0 0 10px rgba(0,229,255,.9));
+}
+#wmap path.conflict-hot{fill:#380d1c;stroke:#ff2244;stroke-width:1.5px;filter:drop-shadow(0 0 8px rgba(255,34,68,.7))}
+#wmap path.conflict-warm{fill:#331700;stroke:#ff6600;stroke-width:1.5px;filter:drop-shadow(0 0 6px rgba(255,102,0,.6))}
+#wmap path.conflict-cold{fill:#2e2800;stroke:#f0c000;stroke-width:1.2px;filter:drop-shadow(0 0 5px rgba(240,192,0,.5))}
+#wmap path.conflict-frozen{fill:#071e2e;stroke:#00ccee;stroke-width:1.2px;filter:drop-shadow(0 0 5px rgba(0,204,238,.4))}
+.mhint{text-align:center;padding:.7rem;font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--dim);letter-spacing:.22em;border-top:1px solid var(--ln);z-index:3;position:relative}
+.cdeco{position:absolute;width:16px;height:16px;pointer-events:none;z-index:4}
+.cdeco.tl{top:0;left:0;border-top:2px solid var(--a);border-left:2px solid var(--a)}
+.cdeco.tr{top:0;right:0;border-top:2px solid var(--a);border-right:2px solid var(--a)}
+.cdeco.bl{bottom:0;left:0;border-bottom:2px solid var(--a);border-left:2px solid var(--a)}
+.cdeco.br{bottom:0;right:0;border-bottom:2px solid var(--a);border-right:2px solid var(--a)}
+/* COUNTRY PANEL */
+#cpanel{display:none;border-top:1px solid var(--ln);background:rgba(3,6,14,.97);backdrop-filter:blur(18px);padding:1.6rem 2rem;position:relative;z-index:3;animation:sldn .3s ease}
+#cpanel.on{display:block}
+@keyframes sldn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.pgrid{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:1.6rem;align-items:start;max-width:1240px;margin:0 auto}
+.pflag{font-size:3.5rem;line-height:1}
+.pname{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.9rem;color:#fff;margin-bottom:.12rem}
+.pregion{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--a);letter-spacing:.3em;margin-bottom:.6rem}
+.pdesc{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.85rem;line-height:1.72;color:var(--dim)}
+.mbadge{display:inline-flex;align-items:center;gap:.4rem;padding:.2rem .6rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.18em;margin:.5rem 0 .6rem}
+.ms{background:rgba(255,45,85,.12);border:1px solid rgba(255,45,85,.4);color:#ff6b85}
+.mm{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.36);color:#ffd700}
+.mw{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.26);color:var(--green)}
+.pstats{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.ps{border:1px solid var(--ln);padding:.48rem .7rem;background:rgba(0,229,255,.022)}
+.psl{font-family:'Share Tech Mono',monospace;font-size:.48rem;color:var(--dim);letter-spacing:.2em;margin-bottom:.16rem}
+.psv{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.92rem;color:var(--a)}
+.palc{display:flex;flex-direction:column;gap:.4rem}
+.palt{font-family:'Share Tech Mono',monospace;font-size:.54rem;letter-spacing:.28em;margin-bottom:.22rem}
+.palt.all{color:var(--green)}.palt.riv{color:var(--a3)}
+.pall{display:flex;flex-wrap:wrap;gap:.35rem}
+.ptag{font-family:'Share Tech Mono',monospace;font-size:.54rem;padding:.16rem .44rem;border-radius:2px;letter-spacing:.1em}
+.ptag.al{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.2);color:var(--green)}
+.ptag.ri{background:rgba(255,45,85,.07);border:1px solid rgba(255,45,85,.2);color:var(--a3)}
+.pclose{position:absolute;top:.9rem;right:1.4rem;font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);cursor:pointer;letter-spacing:.15em;transition:color .2s}
+.pclose:hover{color:var(--a3)}
+/* CONFLICTS */
+#conflicts{padding:6rem 0}
+.cintro{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.92rem;color:var(--dim);max-width:700px;line-height:1.8;margin-bottom:3rem}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.1rem}
+.cc{border:1px solid var(--ln);background:linear-gradient(145deg,rgba(10,16,32,.8),rgba(6,10,20,.9));padding:1.35rem 1.5rem;position:relative;overflow:hidden;transition:border-color .28s,transform .2s;cursor:pointer}
+.cc:hover{border-color:rgba(0,229,255,.25);transform:translateY(-2px)}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.cc.hot::before{background:linear-gradient(to right,#ff2d55,transparent)}
+.cc.warm::before{background:linear-gradient(to right,#ff6b00,transparent)}
+.cc.cold::before{background:linear-gradient(to right,#ffd700,transparent)}
+.cc.frozen::before{background:linear-gradient(to right,var(--a),transparent)}
+.cctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem;gap:1rem}
+.ccname{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.25rem;color:#fff;line-height:1.1}
+.ccloc{font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);letter-spacing:.2em;margin-top:.18rem}
+.ccbdg{font-family:'Share Tech Mono',monospace;font-size:.49rem;letter-spacing:.13em;padding:.18rem .5rem;border-radius:2px;white-space:nowrap;flex-shrink:0}
+.bh{background:rgba(255,45,85,.13);border:1px solid rgba(255,45,85,.38);color:#ff2d55}
+.bw{background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.32);color:var(--orange)}
+.bc{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.28);color:var(--yellow)}
+.bf{background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.22);color:var(--a)}
+.ccdesc{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.81rem;line-height:1.65;color:var(--dim);margin-bottom:.85rem}
+.ccmeta{display:flex;flex-wrap:wrap;gap:.42rem;margin-bottom:.7rem}
+.cm{font-family:'Share Tech Mono',monospace;font-size:.49rem;padding:.14rem .44rem;background:rgba(0,229,255,.03);border:1px solid var(--ln);color:var(--dim);letter-spacing:.1em}
+.cm.since{color:var(--a)}
+/* Parties */
+.ccpar{padding-top:.75rem;border-top:1px solid var(--ln);margin-bottom:.7rem}
+.cptitle{font-family:'Share Tech Mono',monospace;font-size:.47rem;color:var(--dim);letter-spacing:.25em;margin-bottom:.36rem}
+.cplist{display:flex;flex-wrap:wrap;gap:.3rem}
+.cpt{font-family:'Share Tech Mono',monospace;font-size:.51rem;padding:.14rem .4rem;border-radius:2px}
+.cpt.r{background:rgba(255,45,85,.07);border:1px solid rgba(255,45,85,.18);color:#ff9eae}
+.cpt.b{background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.16);color:#7de8f5}
+.cpt.g{background:rgba(200,216,232,.04);border:1px solid rgba(200,216,232,.12);color:var(--dim)}
+/* Map highlight button */
+.cc-mapbtn{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:var(--a);border:1px solid rgba(0,229,255,.3);padding:.18rem .5rem;cursor:pointer;background:rgba(0,229,255,.06);letter-spacing:.12em;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem}
+.cc-mapbtn:hover{background:rgba(0,229,255,.14);border-color:rgba(0,229,255,.6)}
+.cc-mapbtn.active-hl{background:rgba(0,229,255,.18);border-color:var(--a);color:#fff}
+/* TIMELINE PANEL */
+.cc-expand-btn{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:var(--a);border:1px solid rgba(0,229,255,.28);padding:.18rem .5rem;cursor:pointer;background:rgba(0,229,255,.04);letter-spacing:.12em;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem;margin-left:.4rem}
+.cc-expand-btn:hover{background:rgba(0,229,255,.12);border-color:rgba(0,229,255,.55)}
+.cc-tl{display:none;margin-top:.9rem;border-top:1px solid var(--ln);padding-top:.9rem;animation:sldn .25s ease}
+.cc-tl.open{display:block}
+.tl-head{font-family:'Share Tech Mono',monospace;font-size:.57rem;color:var(--a);letter-spacing:.3em;margin-bottom:.7rem}
+.tl-items{display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:auto 1fr;gap:.5rem 1rem;padding:.55rem 0;border-bottom:1px solid rgba(0,229,255,.07);position:relative}
+.tl-item:last-child{border-bottom:none}
+.tl-item::before{content:'';position:absolute;left:52px;top:0;bottom:0;width:1px;background:rgba(0,229,255,.15)}
+.tl-year{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--a);letter-spacing:.1em;white-space:nowrap;padding-top:.06rem;width:48px;text-align:right}
+.tl-text{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.8rem;color:var(--dim);line-height:1.5;padding-left:.6rem}
+.tl-dot{width:7px;height:7px;border-radius:50%;background:var(--a);box-shadow:0 0 6px var(--a);position:absolute;left:49px;top:50%;transform:translateY(-50%)}
+.med-section{margin-top:.9rem;padding:.65rem .75rem;border:1px solid var(--ln);background:rgba(0,229,255,.025)}
+.med-title{font-family:'Share Tech Mono',monospace;font-size:.53rem;color:var(--a);letter-spacing:.28em;margin-bottom:.35rem}
+.med-text{font-family:'Exo 2',sans-serif;font-weight:300;font-size:.79rem;color:var(--dim);line-height:1.55}
+.med-none{color:rgba(255,45,85,.7);font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:.15em}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--ln);padding:1.7rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(4,8,16,.96);flex-wrap:wrap;gap:1rem}
+.flogo{font-family:'Share Tech Mono',monospace;font-size:.95rem;color:var(--a);letter-spacing:.4em;text-shadow:var(--glow)}
+.ftxt{font-family:'Share Tech Mono',monospace;font-size:.54rem;color:var(--dim);letter-spacing:.15em}
+/* RESPONSIVE */
+@media(max-width:900px){.agrid,.pgrid{grid-template-columns:1fr}.pgrid .pstats,.pgrid .palc{grid-column:1/-1}}
+@media(max-width:768px){
+  nav{padding:.85rem 1.3rem}.hbg{display:flex}.nlive{display:none}
+  .nlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(4,8,16,.98);border-bottom:1px solid var(--ln)}
+  .nlinks.open{display:flex}.nlinks li{border-bottom:1px solid var(--ln)}.nlinks a{display:block;padding:.85rem 1.3rem;font-size:.7rem}
+  .wrap{padding:0 1.2rem}.cgrid{grid-template-columns:1fr}
+  #about,#conflicts{padding:4rem 0}#map{padding:3rem 0}
+  footer{padding:1.3rem 1.2rem;justify-content:center;text-align:center}
+  .hstats{gap:1.5rem}.hs .n{font-size:1.4rem}
+}
+
+/* Country color variation — 3 tones for distinct continent regions */
+#wmap path:nth-child(5n+1){fill:#0b1929}
+#wmap path:nth-child(5n+2){fill:#0d1e30}
+#wmap path:nth-child(5n+3){fill:#091624}
+#wmap path:nth-child(5n+4){fill:#0e2033}
+#wmap path:nth-child(5n+5){fill:#0a1a28}
+/* Large nation overrides for clarity */
+#RUS_W,#RUS_E{fill:#081520}
+#CHN{fill:#0c1e2e}
+#CAN_W{fill:#0a1b2c}
+#USA_C,#AK{fill:#0d2035}
+#BRA{fill:#0b1d2e}
+#AUS{fill:#09192a}
+#IND{fill:#0c1e30}
+/* Force override on interaction */
+#wmap path:hover{fill:#1a4060!important;stroke:#00e5ff!important;stroke-width:1.5px!important}
+#wmap path.active{fill:#1a5080!important;stroke:#00e5ff!important;stroke-width:2px!important}
+#wmap path.conflict-hot{fill:#380d1c!important;stroke:#ff2244!important;stroke-width:1.5px!important}
+#wmap path.conflict-warm{fill:#331700!important;stroke:#ff6600!important;stroke-width:1.5px!important}
+#wmap path.conflict-cold{fill:#2e2800!important;stroke:#f0c000!important;stroke-width:1.2px!important}
+#wmap path.conflict-frozen{fill:#071e2e!important;stroke:#00ccee!important;stroke-width:1.2px!important}
+
+/* Country labels */
+.clabel{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7px;
+  fill:rgba(160,220,255,.55);
+  text-anchor:middle;
+  dominant-baseline:middle;
+  pointer-events:all;
+  cursor:pointer;
+  user-select:none;
+  letter-spacing:.5px;
+  paint-order:stroke fill;
+  stroke:#040e1e;
+  stroke-width:2px;
+  transition:fill .15s;
+}
+.clabel:hover{fill:rgba(0,229,255,.95)}
+
+/* ═══ CONFLICT SIDEBAR ═══ */
+#conflict-sidebar{
+  position:fixed;
+  top:0;right:-480px;
+  width:460px;
+  height:100vh;
+  background:linear-gradient(180deg,#030a14 0%,#040c18 100%);
+  border-left:1px solid rgba(0,229,255,.18);
+  z-index:999;
+  transition:right .35s cubic-bezier(.22,1,.36,1);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  box-shadow:-20px 0 60px rgba(0,0,0,.8);
+}
+#conflict-sidebar.open{right:0}
+.csb-header{
+  padding:1.2rem 1.5rem;
+  border-bottom:1px solid rgba(0,229,255,.12);
+  background:rgba(0,229,255,.03);
+  flex-shrink:0;
+}
+.csb-close{
+  position:absolute;
+  top:1rem;right:1rem;
+  color:rgba(0,229,255,.5);
+  cursor:pointer;
+  font-family:'Share Tech Mono',monospace;
+  font-size:.75rem;
+  letter-spacing:.08em;
+  transition:color .15s;
+}
+.csb-close:hover{color:#00e5ff}
+.csb-intensity{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:.65rem;letter-spacing:.1em;
+  padding:.28rem .7rem;
+  border-radius:2px;
+  margin-bottom:.6rem;
+  border:1px solid currentColor;
+}
+.csb-title{
+  font-family:'Exo 2',sans-serif;
+  font-size:1.25rem;font-weight:700;
+  color:#e8f4ff;
+  line-height:1.2;
+  margin-bottom:.25rem;
+}
+.csb-loc{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.65rem;color:rgba(0,229,255,.5);
+  letter-spacing:.12em;
+}
+.csb-body{
+  flex:1;overflow-y:auto;
+  padding:1.25rem 1.5rem;
+  display:flex;flex-direction:column;gap:1.25rem;
+}
+.csb-body::-webkit-scrollbar{width:3px}
+.csb-body::-webkit-scrollbar-track{background:transparent}
+.csb-body::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2)}
+.csb-section{border-left:2px solid rgba(0,229,255,.2);padding-left:1rem}
+.csb-section-title{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.6rem;letter-spacing:.18em;
+  color:rgba(0,229,255,.6);
+  text-transform:uppercase;
+  margin-bottom:.55rem;
+}
+.csb-text{
+  font-size:.82rem;line-height:1.65;
+  color:rgba(200,220,240,.82);
+  font-family:'Rajdhani',sans-serif;
+  font-weight:400;
+}
+/* WHY box */
+.csb-why{border-left-color:rgba(255,180,0,.35)}
+.csb-why .csb-section-title{color:rgba(255,200,60,.7)}
+/* NOW box */
+.csb-now{border-left-color:rgba(255,80,80,.35)}
+.csb-now .csb-section-title{color:rgba(255,100,100,.7)}
+/* DIPLOMACY box */
+.csb-dip{border-left-color:rgba(100,200,100,.3)}
+.csb-dip .csb-section-title{color:rgba(120,220,120,.65)}
+.dip-item{
+  display:flex;gap:.6rem;align-items:flex-start;
+  margin-bottom:.55rem;
+}
+.dip-icon{
+  font-size:.7rem;
+  flex-shrink:0;
+  margin-top:.1rem;
+  opacity:.8;
+}
+.dip-text{font-size:.8rem;color:rgba(180,210,180,.85);font-family:'Rajdhani',sans-serif;line-height:1.5}
+.dip-none{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.7rem;color:rgba(255,80,80,.5);
+  letter-spacing:.08em;
+  padding:.4rem 0;
+}
+/* TIMELINE toggle button */
+.csb-tl-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  border:1px solid rgba(0,229,255,.18);
+  padding:.75rem 1rem;
+  cursor:pointer;
+  font-family:'Share Tech Mono',monospace;
+  font-size:.7rem;letter-spacing:.1em;
+  color:rgba(0,229,255,.7);
+  transition:all .2s;
+  flex-shrink:0;
+  background:rgba(0,229,255,.02);
+  margin:0 1.5rem .5rem;
+}
+.csb-tl-btn:hover{border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06);color:#00e5ff}
+.csb-tl-btn .tl-arrow{transition:transform .25s}
+.csb-tl-btn.open .tl-arrow{transform:rotate(90deg)}
+/* TIMELINE panel */
+.csb-timeline{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s cubic-bezier(.22,1,.36,1);
+  border-top:1px solid rgba(0,229,255,.08);
+  flex-shrink:0;
+}
+.csb-timeline.open{max-height:60vh;overflow-y:auto}
+.csb-timeline::-webkit-scrollbar{width:3px}
+.csb-timeline::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2)}
+.tl-inner{padding:1.2rem 1.5rem;display:flex;flex-direction:column;gap:.8rem}
+.tl-event{
+  display:grid;
+  grid-template-columns:3.5rem 1fr;
+  gap:.6rem;
+  align-items:flex-start;
+}
+.tl-year{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.68rem;letter-spacing:.1em;
+  color:rgba(0,229,255,.6);
+  padding-top:.15rem;
+  text-align:right;
+  line-height:1.4;
+}
+.tl-bar{
+  display:flex;flex-direction:column;gap:.25rem;
+}
+.tl-dot-line{display:flex;align-items:flex-start;gap:.5rem}
+.tl-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#00e5ff;flex-shrink:0;margin-top:.3rem;
+  box-shadow:0 0 5px rgba(0,229,255,.6);
+}
+.tl-dot.major{background:#ff4466;box-shadow:0 0 6px rgba(255,68,102,.7);width:8px;height:8px;margin-top:.2rem}
+.tl-event-text{
+  font-size:.78rem;line-height:1.5;
+  color:rgba(190,215,235,.8);
+  font-family:'Rajdhani',sans-serif;
+}
+.tl-flag{
+  font-size:.65rem;
+  font-family:'Share Tech Mono',monospace;
+  color:rgba(255,180,80,.6);
+  letter-spacing:.05em;
+  margin-left:1rem;
+  padding:.1rem .3rem;
+  border:1px solid rgba(255,180,80,.2);
+  border-radius:2px;
+  display:inline-block;
+  margin-top:.15rem;
+}
+/* Parties strip */
+.csb-parties{
+  display:flex;flex-wrap:wrap;gap:.4rem;
+  margin-top:.5rem;
+}
+.csb-party{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.6rem;letter-spacing:.06em;
+  padding:.22rem .55rem;border-radius:2px;
+}
+.csb-party.r{background:rgba(255,50,80,.12);color:#ff6080;border:1px solid rgba(255,50,80,.25)}
+.csb-party.b{background:rgba(50,150,255,.1);color:#60aaff;border:1px solid rgba(50,150,255,.2)}
+.csb-party.g{background:rgba(150,150,150,.1);color:#aaa;border:1px solid rgba(150,150,150,.2)}
+/* Intensity colors for sidebar */
+#conflict-sidebar.hot .csb-intensity{color:#ff3355;border-color:#ff3355;background:rgba(255,51,85,.08)}
+#conflict-sidebar.warm .csb-intensity{color:#ff7722;border-color:#ff7722;background:rgba(255,119,34,.08)}
+#conflict-sidebar.cold .csb-intensity{color:#f0c000;border-color:#f0c000;background:rgba(240,192,0,.08)}
+#conflict-sidebar.frozen .csb-intensity{color:#00ccee;border-color:#00ccee;background:rgba(0,204,238,.08)}
+#conflict-sidebar.hot{border-left-color:rgba(255,51,85,.4)}
+#conflict-sidebar.warm{border-left-color:rgba(255,119,34,.35)}
+#conflict-sidebar.cold{border-left-color:rgba(240,192,0,.3)}
+#conflict-sidebar.frozen{border-left-color:rgba(0,204,238,.3)}
+@media(max-width:768px){
+  #conflict-sidebar{width:100vw;right:-100vw}
+}
+
+.cc-action-hint{
+  font-family:'Share Tech Mono',monospace;
+  font-size:.6rem;letter-spacing:.1em;
+  color:rgba(0,229,255,.3);
+  margin-top:.6rem;
+  transition:color .2s;
+}
+.cc:hover .cc-action-hint{color:rgba(0,229,255,.6)}
+.cc-tags{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.3rem}
+</style>
+</head>
+<body>
+<div id="sb"></div>
+<nav>
+  <a href="#hero" class="nlogo">VORTEL<small>GEOPOLITICAL INTELLIGENCE</small></a>
+  <ul class="nlinks" id="navlinks">
+    <li><a href="#hero">HOME</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#map">MAP</a></li>
+    <li><a href="#conflicts">CONFLICTS</a></li>
+  </ul>
+  <div class="nlive"><span class="ld"></span>SIGNAL LIVE // 2026</div>
+  <div class="hbg" onclick="document.getElementById('navlinks').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<section id="hero">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow">// GEOPOLITICAL INTELLIGENCE PLATFORM — EST. 2026</div>
+  <h1 class="hl">VOR<span class="ac">TEL</span></h1>
+  <p class="tgl">Mapping power. Decoding conflict. Understanding the world's hidden architecture.</p>
+  <div class="hline"></div>
+  <div class="hstats">
+    <div class="hs"><span class="n">195</span><span class="l">NATIONS</span></div>
+    <div class="hs"><span class="n">40+</span><span class="l">CONFLICTS</span></div>
+    <div class="hs"><span class="n">24/7</span><span class="l">MONITORING</span></div>
+    <div class="hs"><span class="n">9</span><span class="l">FLASHPOINTS</span></div>
+  </div>
+</section>
+<section id="about">
+  <div class="wrap">
+    <div class="sh"><div class="stag">// 01 — ABOUT</div><div class="sr"></div></div>
+    <h2 class="stitle">Intelligence <span>Architecture</span></h2>
+    <div class="agrid">
+      <div class="atext">
+        <p><strong>VORTEL</strong> is a geopolitical intelligence portfolio built on the premise that the world's most consequential dynamics unfold beneath the surface of mainstream narrative.</p>
+        <p>We analyze the shifting tectonic plates of global power — alliance formations, resource competition, ideological fault lines, and the silent wars fought through economics, information, and influence.</p>
+        <p>From the South China Sea to Arctic corridors, from digital sovereignty battles to energy infrastructure — <strong>VORTEL decodes the signals others miss.</strong></p>
+      </div>
+      <div class="acards">
+        <div class="acard"><div class="act">// STRATEGIC ANALYSIS</div><div class="acb">Deep-dive assessments of great power competition, regional instability, and emerging threat vectors as of 2026.</div></div>
+        <div class="acard"><div class="act">// CONFLICT MAPPING</div><div class="acb">Real-time cartography of active conflicts, proxy dynamics, and military posture shifts across all theaters.</div></div>
+        <div class="acard"><div class="act">// ECONOMIC WARFARE</div><div class="acb">Sanctions architecture, trade weaponization, debt-trap diplomacy, and currency competition analysis.</div></div>
+        <div class="acard"><div class="act">// INFORMATION THEATER</div><div class="acb">Disinformation networks, narrative engineering, and the weaponization of perception at scale.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="map">
+  <div class="wrap">
+    <div class="sh"><div class="stag">// 02 — GLOBAL THEATER</div><div class="sr"></div></div>
+    <h2 class="stitle">Interactive <span>World Map</span></h2>
+    <p style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.2em;margin-bottom:1.5rem">SELECT ANY NATION OR CONFLICT TO HIGHLIGHT ON MAP</p>
+  </div>
+  <div class="wrap">
+  <div class="mwrap">
+    <div class="cdeco tl"></div><div class="cdeco tr"></div><div class="cdeco bl"></div><div class="cdeco br"></div>
+    <div class="mbar">
+      <div class="mbarl">VORTEL // GLOBAL THEATER — EQUIRECTANGULAR PROJECTION — 170 TERRITORIES MAPPED</div>
+      <div class="bdots"><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
+    </div>
+    <div class="msvgwrap">
+      <svg id="wmap" viewBox="0 0 2000 950" xmlns="http://www.w3.org/2000/svg">
+        <rect class="ocean" width="2000" height="950"/>
+        <!-- Equator (prominent) -->
+        <line x1="0" y1="500" x2="2000" y2="500" stroke="rgba(0,229,255,.15)" stroke-width=".8" stroke-dasharray="6,8"/>
+        <!-- Tropics of Cancer/Capricorn -->
+        <line x1="0" y1="427" x2="2000" y2="427" stroke="rgba(0,229,255,.07)" stroke-width=".5" stroke-dasharray="3,9"/>
+        <line x1="0" y1="573" x2="2000" y2="573" stroke="rgba(0,229,255,.07)" stroke-width=".5" stroke-dasharray="3,9"/>
+        <!-- Arctic / Antarctic circles -->
+        <line x1="0" y1="237" x2="2000" y2="237" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <line x1="0" y1="763" x2="2000" y2="763" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <!-- Prime meridian (0°) -->
+        <line x1="1000" y1="0" x2="1000" y2="950" stroke="rgba(0,229,255,.09)" stroke-width=".5" stroke-dasharray="4,8"/>
+        <!-- 60°W, 60°E, 120°W, 120°E, 180° -->
+        <line x1="667" y1="0" x2="667" y2="950" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <line x1="1333" y1="0" x2="1333" y2="950" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <line x1="333" y1="0" x2="333" y2="950" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <line x1="1667" y1="0" x2="1667" y2="950" stroke="rgba(0,229,255,.05)" stroke-width=".4" stroke-dasharray="2,10"/>
+        <!-- 30°E, 90°E, 150°E, 30°W, 90°W, 150°W -->
+        <line x1="1167" y1="0" x2="1167" y2="950" stroke="rgba(0,229,255,.03)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="1500" y1="0" x2="1500" y2="950" stroke="rgba(0,229,255,.03)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="833" y1="0" x2="833" y2="950" stroke="rgba(0,229,255,.03)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="500" y1="0" x2="500" y2="950" stroke="rgba(0,229,255,.03)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <!-- Lat lines 30°N, 60°N, 30°S, 60°S -->
+        <line x1="0" y1="342" x2="2000" y2="342" stroke="rgba(0,229,255,.04)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="0" y1="183" x2="2000" y2="183" stroke="rgba(0,229,255,.04)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="0" y1="658" x2="2000" y2="658" stroke="rgba(0,229,255,.04)" stroke-width=".3" stroke-dasharray="1,12"/>
+        <line x1="0" y1="817" x2="2000" y2="817" stroke="rgba(0,229,255,.04)" stroke-width=".3" stroke-dasharray="1,12"/>
+<path id="AK" d="M 66.7,100.3 L 94.4,116.1 L 122.2,168.9 L 150.0,174.2 L 177.8,158.3 L 194.4,147.8 L 216.7,158.3 L 216.7,105.6 L 150.0,100.3 L 66.7,100.3 Z" onclick="showC('USA')"/>
+<path id="GRL" d="M 594.4,36.9 L 900.0,36.9 L 905.6,68.6 L 877.8,105.6 L 861.1,131.9 L 833.3,147.8 L 755.6,158.3 L 711.1,147.8 L 700.0,105.6 L 683.3,73.9 L 638.9,52.8 L 594.4,36.9 Z" onclick="showC('GRL')"/>
+<path id="CAN_W" d="M 216.7,158.3 L 244.4,163.6 L 277.8,184.7 L 311.1,216.4 L 366.7,216.4 L 388.9,216.4 L 444.4,216.4 L 500.0,221.7 L 533.3,232.2 L 577.8,242.8 L 600.0,237.5 L 627.8,226.9 L 666.7,226.9 L 688.9,205.8 L 705.6,184.7 L 666.7,158.3 L 638.9,142.5 L 622.2,158.3 L 600.0,147.8 L 555.6,142.5 L 511.1,126.7 L 466.7,100.3 L 444.4,89.7 L 388.9,84.4 L 333.3,84.4 L 277.8,105.6 L 216.7,158.3 Z" onclick="showC('CAN')"/>
+<path id="USA_C" d="M 311.1,216.4 L 366.7,216.4 L 388.9,216.4 L 444.4,216.4 L 500.0,221.7 L 533.3,232.2 L 555.6,248.1 L 577.8,242.8 L 600.0,258.6 L 611.1,253.3 L 627.8,242.8 L 611.1,258.6 L 583.3,290.3 L 555.6,306.1 L 527.8,316.7 L 511.1,316.7 L 500.0,321.9 L 477.8,316.7 L 461.1,337.8 L 444.4,327.2 L 422.2,321.9 L 383.3,311.4 L 350.0,306.1 L 333.3,295.6 L 311.1,232.2 L 311.1,216.4 Z" onclick="showC('USA')"/>
+<path id="MEX" d="M 350.0,306.1 L 383.3,311.4 L 422.2,321.9 L 444.4,327.2 L 461.1,337.8 L 477.8,374.7 L 500.0,380.0 L 511.1,390.6 L 500.0,380.0 L 477.8,374.7 L 455.6,374.7 L 422.2,374.7 L 405.6,353.6 L 388.9,348.3 L 361.1,321.9 L 350.0,306.1 Z" onclick="showC('MEX')"/>
+<path id="CUB" d="M 527.8,358.9 L 555.6,353.6 L 583.3,369.4 L 588.9,369.4 L 577.8,358.9 L 555.6,353.6 L 527.8,358.9 Z" onclick="showC('CUB')"/>
+<path id="GTM" d="M 488.9,380.0 L 500.0,380.0 L 511.1,390.6 L 511.1,401.1 L 500.0,406.4 L 488.9,401.1 L 488.9,380.0 Z" onclick="showC('GTM')"/>
+<path id="BLZ" d="M 505.6,380.0 L 511.1,380.0 L 511.1,390.6 L 505.6,395.8 L 505.6,380.0 Z" onclick="showC('BLZ')"/>
+<path id="HND" d="M 488.9,401.1 L 511.1,395.8 L 538.9,395.8 L 538.9,401.1 L 516.7,406.4 L 505.6,406.4 L 488.9,401.1 Z" onclick="showC('HND')"/>
+<path id="SLV" d="M 500.0,401.1 L 511.1,401.1 L 511.1,406.4 L 500.0,406.4 L 500.0,401.1 Z" onclick="showC('SLV')"/>
+<path id="NIC" d="M 511.1,406.4 L 538.9,401.1 L 538.9,416.9 L 522.2,416.9 L 511.1,406.4 Z" onclick="showC('NIC')"/>
+<path id="CRI" d="M 527.8,416.9 L 538.9,416.9 L 538.9,432.8 L 527.8,427.5 L 527.8,416.9 Z" onclick="showC('CRI')"/>
+<path id="PAN" d="M 538.9,432.8 L 561.1,427.5 L 572.2,432.8 L 572.2,438.1 L 555.6,432.8 L 538.9,432.8 Z" onclick="showC('PAN')"/>
+<path id="COL" d="M 572.2,432.8 L 594.4,416.9 L 600.0,411.7 L 611.1,411.7 L 627.8,443.3 L 638.9,469.7 L 611.1,485.6 L 583.3,485.6 L 572.2,475.0 L 561.1,469.7 L 572.2,432.8 Z" onclick="showC('COL')"/>
+<path id="VEN" d="M 594.4,416.9 L 633.3,416.9 L 655.6,416.9 L 666.7,427.5 L 666.7,448.6 L 638.9,469.7 L 627.8,443.3 L 611.1,411.7 L 594.4,416.9 Z" onclick="showC('VEN')"/>
+<path id="GUY" d="M 666.7,427.5 L 683.3,443.3 L 683.3,453.9 L 666.7,464.4 L 638.9,469.7 L 666.7,448.6 L 666.7,427.5 Z" onclick="showC('GUY')"/>
+<path id="SUR" d="M 683.3,443.3 L 700.0,453.9 L 705.6,453.9 L 700.0,443.3 L 683.3,443.3 Z" onclick="showC('SUR')"/>
+<path id="GUF" d="M 700.0,453.9 L 711.1,453.9 L 711.1,464.4 L 700.0,464.4 L 700.0,453.9 Z" onclick="showC('GUF')"/>
+<path id="BRA" d="M 594.4,448.6 L 611.1,485.6 L 638.9,469.7 L 666.7,464.4 L 700.0,453.9 L 722.2,469.7 L 750.0,448.6 L 788.9,496.1 L 805.6,517.2 L 805.6,538.3 L 788.9,559.4 L 777.8,580.6 L 755.6,596.4 L 733.3,612.2 L 705.6,649.2 L 705.6,654.4 L 677.8,643.9 L 666.7,633.3 L 677.8,580.6 L 666.7,559.4 L 677.8,538.3 L 666.7,517.2 L 638.9,527.8 L 611.1,527.8 L 600.0,554.2 L 594.4,538.3 L 594.4,448.6 Z" onclick="showC('BRA')"/>
+<path id="PER" d="M 555.6,490.8 L 583.3,485.6 L 611.1,485.6 L 594.4,538.3 L 611.1,527.8 L 638.9,527.8 L 622.2,548.9 L 611.1,570.0 L 583.3,554.2 L 555.6,517.2 L 555.6,490.8 Z" onclick="showC('PER')"/>
+<path id="ECU" d="M 555.6,490.8 L 583.3,485.6 L 572.2,475.0 L 561.1,469.7 L 555.6,490.8 Z" onclick="showC('ECU')"/>
+<path id="BOL" d="M 622.2,548.9 L 638.9,527.8 L 666.7,559.4 L 677.8,580.6 L 666.7,591.1 L 638.9,591.1 L 622.2,570.0 L 622.2,548.9 Z" onclick="showC('BOL')"/>
+<path id="PRY" d="M 677.8,580.6 L 694.4,580.6 L 694.4,591.1 L 677.8,591.1 L 666.7,591.1 L 677.8,580.6 Z" onclick="showC('PRY')"/>
+<path id="CHL" d="M 611.1,570.0 L 622.2,570.0 L 622.2,591.1 L 611.1,622.8 L 600.0,649.2 L 600.0,675.6 L 600.0,701.9 L 588.9,728.3 L 627.8,765.3 L 638.9,765.3 L 633.3,738.9 L 611.1,717.8 L 600.0,696.7 L 605.6,675.6 L 611.1,622.8 L 611.1,570.0 Z" onclick="showC('CHL')"/>
+<path id="ARG" d="M 622.2,591.1 L 638.9,591.1 L 677.8,591.1 L 694.4,591.1 L 705.6,649.2 L 666.7,675.6 L 650.0,696.7 L 633.3,717.8 L 622.2,749.4 L 638.9,765.3 L 622.2,765.3 L 611.1,738.9 L 600.0,712.5 L 611.1,675.6 L 622.2,659.7 L 638.9,622.8 L 638.9,591.1 Z" onclick="showC('ARG')"/>
+<path id="URY" d="M 705.6,649.2 L 705.6,654.4 L 694.4,654.4 L 677.8,643.9 L 688.9,633.3 L 705.6,649.2 Z" onclick="showC('URY')"/>
+<path id="FLK" d="M 672.2,749.4 L 683.3,744.2 L 683.3,754.7 L 666.7,754.7 L 672.2,749.4 Z" onclick="showC('ARG')"/>
+<path id="ISL" d="M 866.7,137.2 L 877.8,137.2 L 922.2,142.5 L 927.8,131.9 L 900.0,126.7 L 877.8,126.7 L 866.7,131.9 L 866.7,137.2 Z" onclick="showC('ISL')"/>
+<path id="IRL" d="M 944.4,200.6 L 955.6,200.6 L 966.7,195.3 L 966.7,190.0 L 955.6,184.7 L 944.4,190.0 L 944.4,200.6 Z" onclick="showC('IRL')"/>
+<path id="GBR" d="M 972.2,211.1 L 983.3,205.8 L 1000.0,205.8 L 1005.6,200.6 L 994.4,190.0 L 988.9,184.7 L 977.8,179.4 L 966.7,168.9 L 983.3,168.9 L 988.9,179.4 L 1000.0,195.3 L 994.4,205.8 L 983.3,205.8 L 972.2,211.1 Z" onclick="showC('GBR')"/>
+<path id="PRT" d="M 950.0,279.7 L 961.1,279.7 L 961.1,274.4 L 961.1,263.9 L 961.1,253.3 L 955.6,253.3 L 950.0,253.3 L 950.0,279.7 Z" onclick="showC('PRT')"/>
+<path id="ESP" d="M 950.0,285.0 L 955.6,285.0 L 966.7,285.0 L 972.2,285.0 L 988.9,285.0 L 1000.0,279.7 L 1016.7,263.9 L 1016.7,253.3 L 1000.0,248.1 L 988.9,248.1 L 977.8,242.8 L 955.6,242.8 L 950.0,253.3 L 961.1,253.3 L 961.1,279.7 L 950.0,279.7 L 950.0,285.0 Z" onclick="showC('ESP')"/>
+<path id="FRA" d="M 988.9,242.8 L 1005.6,242.8 L 1016.7,242.8 L 1022.2,242.8 L 1027.8,232.2 L 1033.3,226.9 L 1033.3,216.4 L 1016.7,211.1 L 1011.1,205.8 L 1000.0,205.8 L 988.9,216.4 L 977.8,221.7 L 988.9,242.8 Z" onclick="showC('FRA')"/>
+<path id="BEL" d="M 1016.7,211.1 L 1022.2,211.1 L 1027.8,211.1 L 1033.3,205.8 L 1022.2,205.8 L 1016.7,211.1 Z" onclick="showC('BEL')"/>
+<path id="NLD" d="M 1022.2,205.8 L 1027.8,200.6 L 1027.8,195.3 L 1033.3,195.3 L 1033.3,205.8 L 1022.2,205.8 Z" onclick="showC('NLD')"/>
+<path id="LUX" d="M 1027.8,216.4 L 1033.3,211.1 L 1033.3,216.4 L 1027.8,216.4 Z" onclick="showC('LUX')"/>
+<path id="DEU" d="M 1033.3,226.9 L 1044.4,226.9 L 1055.6,226.9 L 1066.7,226.9 L 1072.2,211.1 L 1077.8,205.8 L 1077.8,190.0 L 1066.7,190.0 L 1055.6,184.7 L 1050.0,184.7 L 1044.4,190.0 L 1038.9,195.3 L 1033.3,200.6 L 1033.3,205.8 L 1033.3,211.1 L 1033.3,216.4 L 1033.3,226.9 Z" onclick="showC('DEU')"/>
+<path id="CHE" d="M 1033.3,226.9 L 1038.9,221.7 L 1044.4,221.7 L 1055.6,221.7 L 1055.6,226.9 L 1044.4,226.9 L 1033.3,226.9 Z" onclick="showC('CHE')"/>
+<path id="AUT" d="M 1055.6,226.9 L 1066.7,226.9 L 1072.2,226.9 L 1083.3,221.7 L 1088.9,221.7 L 1094.4,226.9 L 1083.3,226.9 L 1072.2,226.9 L 1055.6,226.9 Z" onclick="showC('AUT')"/>
+<path id="ITA" d="M 1038.9,242.8 L 1044.4,242.8 L 1055.6,242.8 L 1066.7,242.8 L 1077.8,253.3 L 1083.3,274.4 L 1088.9,263.9 L 1083.3,274.4 L 1077.8,253.3 L 1066.7,242.8 L 1077.8,232.2 L 1066.7,226.9 L 1055.6,226.9 L 1044.4,226.9 L 1038.9,242.8 Z" onclick="showC('ITA')"/>
+<path id="DNK" d="M 1044.4,184.7 L 1055.6,184.7 L 1066.7,179.4 L 1066.7,174.2 L 1055.6,168.9 L 1050.0,168.9 L 1044.4,179.4 L 1044.4,184.7 Z" onclick="showC('DNK')"/>
+<path id="SWE" d="M 1066.7,179.4 L 1077.8,168.9 L 1088.9,158.3 L 1100.0,158.3 L 1111.1,142.5 L 1122.2,131.9 L 1133.3,126.7 L 1122.2,116.1 L 1100.0,116.1 L 1077.8,126.7 L 1066.7,147.8 L 1066.7,179.4 Z" onclick="showC('SWE')"/>
+<path id="NOR" d="M 1022.2,168.9 L 1044.4,168.9 L 1055.6,163.6 L 1066.7,163.6 L 1066.7,147.8 L 1077.8,131.9 L 1088.9,116.1 L 1111.1,105.6 L 1133.3,105.6 L 1155.6,100.3 L 1166.7,105.6 L 1155.6,116.1 L 1133.3,126.7 L 1122.2,131.9 L 1111.1,142.5 L 1100.0,158.3 L 1077.8,168.9 L 1066.7,168.9 L 1044.4,168.9 L 1022.2,168.9 Z" onclick="showC('NOR')"/>
+<path id="FIN" d="M 1122.2,158.3 L 1133.3,158.3 L 1144.4,158.3 L 1155.6,147.8 L 1166.7,137.2 L 1166.7,126.7 L 1155.6,110.8 L 1144.4,105.6 L 1122.2,116.1 L 1111.1,137.2 L 1122.2,158.3 Z" onclick="showC('FIN')"/>
+<path id="EST" d="M 1122.2,174.2 L 1133.3,163.6 L 1144.4,163.6 L 1150.0,168.9 L 1144.4,174.2 L 1122.2,174.2 Z" onclick="showC('EST')"/>
+<path id="LVA" d="M 1116.7,179.4 L 1133.3,179.4 L 1150.0,174.2 L 1144.4,174.2 L 1133.3,174.2 L 1122.2,174.2 L 1116.7,179.4 Z" onclick="showC('LVA')"/>
+<path id="LTU" d="M 1116.7,190.0 L 1133.3,190.0 L 1138.9,184.7 L 1133.3,179.4 L 1116.7,179.4 L 1116.7,190.0 Z" onclick="showC('LTU')"/>
+<path id="POL" d="M 1077.8,205.8 L 1100.0,211.1 L 1122.2,211.1 L 1133.3,205.8 L 1133.3,190.0 L 1122.2,184.7 L 1100.0,184.7 L 1077.8,190.0 L 1077.8,205.8 Z" onclick="showC('POL')"/>
+<path id="CZE" d="M 1066.7,205.8 L 1077.8,205.8 L 1088.9,211.1 L 1100.0,211.1 L 1100.0,216.4 L 1088.9,216.4 L 1077.8,216.4 L 1066.7,211.1 L 1066.7,205.8 Z" onclick="showC('CZE')"/>
+<path id="SVK" d="M 1088.9,216.4 L 1100.0,216.4 L 1111.1,216.4 L 1122.2,216.4 L 1122.2,221.7 L 1100.0,221.7 L 1088.9,221.7 L 1088.9,216.4 Z" onclick="showC('SVK')"/>
+<path id="HUN" d="M 1088.9,221.7 L 1100.0,221.7 L 1111.1,216.4 L 1122.2,221.7 L 1122.2,232.2 L 1111.1,232.2 L 1100.0,232.2 L 1088.9,232.2 L 1088.9,221.7 Z" onclick="showC('HUN')"/>
+<path id="ROU" d="M 1122.2,221.7 L 1133.3,221.7 L 1144.4,221.7 L 1166.7,232.2 L 1166.7,248.1 L 1155.6,248.1 L 1144.4,237.5 L 1133.3,242.8 L 1122.2,242.8 L 1122.2,221.7 Z" onclick="showC('ROU')"/>
+<path id="BGR" d="M 1122.2,242.8 L 1133.3,242.8 L 1144.4,242.8 L 1155.6,248.1 L 1155.6,253.3 L 1144.4,253.3 L 1133.3,253.3 L 1122.2,248.1 L 1122.2,242.8 Z" onclick="showC('BGR')"/>
+<path id="GRC" d="M 1111.1,253.3 L 1122.2,253.3 L 1122.2,274.4 L 1133.3,274.4 L 1144.4,258.6 L 1133.3,258.6 L 1122.2,263.9 L 1111.1,274.4 L 1111.1,263.9 L 1111.1,253.3 Z" onclick="showC('GRC')"/>
+<path id="SRB" d="M 1105.6,232.2 L 1111.1,232.2 L 1122.2,232.2 L 1122.2,242.8 L 1111.1,242.8 L 1105.6,242.8 L 1105.6,232.2 Z" onclick="showC('SRB')"/>
+<path id="KOS" d="M 1111.1,248.1 L 1116.7,248.1 L 1116.7,253.3 L 1111.1,253.3 L 1111.1,248.1 Z" onclick="showC('KOS')"/>
+<path id="BIH" d="M 1088.9,232.2 L 1100.0,232.2 L 1105.6,242.8 L 1100.0,248.1 L 1088.9,242.8 L 1088.9,232.2 Z" onclick="showC('BIH')"/>
+<path id="HRV" d="M 1077.8,232.2 L 1088.9,232.2 L 1088.9,242.8 L 1100.0,248.1 L 1088.9,253.3 L 1077.8,242.8 L 1077.8,232.2 Z" onclick="showC('HRV')"/>
+<path id="MNE" d="M 1100.0,248.1 L 1111.1,248.1 L 1111.1,253.3 L 1100.0,253.3 L 1100.0,248.1 Z" onclick="showC('MNE')"/>
+<path id="ALB" d="M 1111.1,253.3 L 1111.1,263.9 L 1116.7,263.9 L 1116.7,253.3 L 1111.1,253.3 Z" onclick="showC('ALB')"/>
+<path id="MKD" d="M 1111.1,253.3 L 1122.2,253.3 L 1122.2,258.6 L 1111.1,258.6 L 1111.1,253.3 Z" onclick="showC('MKD')"/>
+<path id="SVN" d="M 1072.2,232.2 L 1077.8,232.2 L 1077.8,237.5 L 1083.3,237.5 L 1077.8,242.8 L 1072.2,242.8 L 1072.2,232.2 Z" onclick="showC('SVN')"/>
+<path id="UKR" d="M 1122.2,211.1 L 1133.3,211.1 L 1155.6,211.1 L 1177.8,200.6 L 1200.0,200.6 L 1211.1,211.1 L 1200.0,221.7 L 1188.9,232.2 L 1177.8,232.2 L 1166.7,232.2 L 1155.6,221.7 L 1133.3,221.7 L 1122.2,221.7 L 1122.2,211.1 Z" onclick="showC('UKR')"/>
+<path id="BLR" d="M 1133.3,200.6 L 1144.4,195.3 L 1155.6,190.0 L 1177.8,190.0 L 1188.9,200.6 L 1166.7,200.6 L 1144.4,205.8 L 1133.3,205.8 L 1133.3,200.6 Z" onclick="showC('BLR')"/>
+<path id="MDA" d="M 1155.6,221.7 L 1166.7,221.7 L 1166.7,232.2 L 1155.6,232.2 L 1155.6,221.7 Z" onclick="showC('MDA')"/>
+<path id="RUS_W" d="M 1155.6,179.4 L 1177.8,158.3 L 1166.7,131.9 L 1155.6,105.6 L 1200.0,105.6 L 1222.2,116.1 L 1244.4,116.1 L 1277.8,116.1 L 1305.6,95.0 L 1333.3,116.1 L 1311.1,158.3 L 1300.0,179.4 L 1266.7,200.6 L 1244.4,221.7 L 1222.2,221.7 L 1200.0,221.7 L 1177.8,200.6 L 1155.6,190.0 L 1155.6,179.4 Z" onclick="showC('RUS')"/>
+<path id="RUS_E" d="M 1155.6,105.6 L 1200.0,105.6 L 1333.3,95.0 L 1444.4,89.7 L 1555.6,95.0 L 1666.7,95.0 L 1777.8,95.0 L 1861.1,116.1 L 1933.3,137.2 L 2000.0,126.7 L 2000.0,200.6 L 1933.3,184.7 L 1888.9,200.6 L 1833.3,211.1 L 1777.8,221.7 L 1750.0,221.7 L 1722.2,232.2 L 1750.0,242.8 L 1733.3,242.8 L 1722.2,248.1 L 1711.1,221.7 L 1677.8,221.7 L 1666.7,195.3 L 1638.9,211.1 L 1622.2,200.6 L 1583.3,184.7 L 1555.6,200.6 L 1527.8,184.7 L 1500.0,200.6 L 1477.8,200.6 L 1444.4,179.4 L 1422.2,158.3 L 1388.9,137.2 L 1355.6,137.2 L 1311.1,158.3 L 1277.8,116.1 L 1244.4,116.1 L 1200.0,105.6 L 1155.6,105.6 Z" onclick="showC('RUS')"/>
+<path id="TUR" d="M 1144.4,253.3 L 1155.6,253.3 L 1177.8,253.3 L 1200.0,274.4 L 1211.1,274.4 L 1222.2,274.4 L 1233.3,274.4 L 1244.4,263.9 L 1244.4,274.4 L 1233.3,285.0 L 1222.2,285.0 L 1200.0,285.0 L 1177.8,285.0 L 1155.6,279.7 L 1144.4,274.4 L 1144.4,253.3 Z" onclick="showC('TUR')"/>
+<path id="GEO" d="M 1222.2,253.3 L 1233.3,253.3 L 1244.4,253.3 L 1244.4,263.9 L 1233.3,274.4 L 1222.2,274.4 L 1222.2,253.3 Z" onclick="showC('GEO')"/>
+<path id="ARM" d="M 1244.4,263.9 L 1255.6,263.9 L 1255.6,274.4 L 1244.4,274.4 L 1244.4,263.9 Z" onclick="showC('ARM')"/>
+<path id="AZE" d="M 1244.4,253.3 L 1266.7,253.3 L 1277.8,263.9 L 1266.7,274.4 L 1255.6,263.9 L 1244.4,263.9 L 1244.4,253.3 Z" onclick="showC('AZE')"/>
+<path id="SYR" d="M 1200.0,279.7 L 1211.1,279.7 L 1222.2,274.4 L 1233.3,274.4 L 1233.3,295.6 L 1211.1,300.8 L 1200.0,300.8 L 1200.0,279.7 Z" onclick="showC('SYR')"/>
+<path id="LBN" d="M 1194.4,295.6 L 1200.0,295.6 L 1200.0,300.8 L 1194.4,300.8 L 1194.4,295.6 Z" onclick="showC('LBN')"/>
+<path id="ISR" d="M 1188.9,300.8 L 1200.0,300.8 L 1194.4,316.7 L 1188.9,316.7 L 1188.9,300.8 Z" onclick="showC('ISR')"/>
+<path id="PSE" d="M 1188.9,306.1 L 1194.4,306.1 L 1194.4,311.4 L 1188.9,311.4 L 1188.9,306.1 Z" onclick="showC('PSE')"/>
+<path id="JOR" d="M 1200.0,300.8 L 1211.1,300.8 L 1211.1,316.7 L 1200.0,321.9 L 1194.4,316.7 L 1200.0,300.8 Z" onclick="showC('JOR')"/>
+<path id="IRQ" d="M 1211.1,274.4 L 1222.2,274.4 L 1244.4,274.4 L 1255.6,285.0 L 1266.7,316.7 L 1244.4,327.2 L 1233.3,316.7 L 1211.1,300.8 L 1211.1,274.4 Z" onclick="showC('IRQ')"/>
+<path id="IRN" d="M 1244.4,263.9 L 1266.7,253.3 L 1277.8,263.9 L 1300.0,274.4 L 1322.2,274.4 L 1333.3,285.0 L 1333.3,316.7 L 1322.2,337.8 L 1311.1,337.8 L 1300.0,337.8 L 1277.8,327.2 L 1266.7,337.8 L 1266.7,316.7 L 1255.6,285.0 L 1244.4,274.4 L 1244.4,263.9 Z" onclick="showC('IRN')"/>
+<path id="KWT" d="M 1255.6,316.7 L 1266.7,316.7 L 1266.7,327.2 L 1255.6,327.2 L 1255.6,316.7 Z" onclick="showC('KWT')"/>
+<path id="SAU" d="M 1200.0,321.9 L 1211.1,316.7 L 1233.3,316.7 L 1244.4,327.2 L 1266.7,337.8 L 1300.0,348.3 L 1322.2,358.9 L 1311.1,358.9 L 1300.0,380.0 L 1277.8,380.0 L 1255.6,385.3 L 1244.4,380.0 L 1233.3,390.6 L 1222.2,369.4 L 1200.0,358.9 L 1200.0,321.9 Z" onclick="showC('SAU')"/>
+<path id="YEM" d="M 1233.3,390.6 L 1244.4,380.0 L 1255.6,385.3 L 1277.8,390.6 L 1288.9,411.7 L 1255.6,411.7 L 1244.4,411.7 L 1233.3,401.1 L 1233.3,390.6 Z" onclick="showC('YEM')"/>
+<path id="OMN" d="M 1300.0,348.3 L 1322.2,358.9 L 1333.3,358.9 L 1333.3,390.6 L 1311.1,380.0 L 1288.9,380.0 L 1277.8,380.0 L 1300.0,348.3 Z" onclick="showC('OMN')"/>
+<path id="ARE" d="M 1300.0,348.3 L 1311.1,348.3 L 1311.1,337.8 L 1322.2,348.3 L 1311.1,358.9 L 1300.0,348.3 Z" onclick="showC('ARE')"/>
+<path id="QAT" d="M 1277.8,337.8 L 1288.9,337.8 L 1288.9,348.3 L 1277.8,348.3 L 1277.8,337.8 Z" onclick="showC('QAT')"/>
+<path id="BHR" d="M 1280.0,336.7 L 1282.2,336.7 L 1282.2,339.4 L 1280.0,339.4 L 1280.0,336.7 Z" onclick="showC('BHR')"/>
+<path id="AFG" d="M 1333.3,274.4 L 1355.6,274.4 L 1366.7,274.4 L 1377.8,285.0 L 1388.9,295.6 L 1377.8,316.7 L 1355.6,316.7 L 1333.3,316.7 L 1322.2,295.6 L 1322.2,274.4 L 1333.3,274.4 Z" onclick="showC('AFG')"/>
+<path id="PAK" d="M 1333.3,274.4 L 1366.7,274.4 L 1377.8,285.0 L 1388.9,295.6 L 1400.0,295.6 L 1411.1,285.0 L 1422.2,295.6 L 1411.1,316.7 L 1388.9,348.3 L 1366.7,348.3 L 1344.4,348.3 L 1333.3,337.8 L 1333.3,316.7 L 1355.6,316.7 L 1377.8,316.7 L 1388.9,295.6 L 1377.8,285.0 L 1366.7,274.4 L 1333.3,274.4 Z" onclick="showC('PAK')"/>
+<path id="KAZ" d="M 1277.8,232.2 L 1300.0,232.2 L 1322.2,242.8 L 1333.3,242.8 L 1366.7,253.3 L 1388.9,253.3 L 1388.9,232.2 L 1400.0,211.1 L 1377.8,190.0 L 1333.3,190.0 L 1300.0,200.6 L 1277.8,211.1 L 1277.8,232.2 Z" onclick="showC('KAZ')"/>
+<path id="TKM" d="M 1288.9,253.3 L 1311.1,253.3 L 1333.3,274.4 L 1322.2,274.4 L 1322.2,295.6 L 1300.0,274.4 L 1288.9,274.4 L 1288.9,253.3 Z" onclick="showC('TKM')"/>
+<path id="UZB" d="M 1311.1,253.3 L 1333.3,242.8 L 1366.7,253.3 L 1366.7,263.9 L 1355.6,274.4 L 1333.3,274.4 L 1322.2,274.4 L 1311.1,253.3 Z" onclick="showC('UZB')"/>
+<path id="TJK" d="M 1366.7,263.9 L 1388.9,263.9 L 1400.0,274.4 L 1388.9,285.0 L 1377.8,285.0 L 1366.7,274.4 L 1366.7,263.9 Z" onclick="showC('TJK')"/>
+<path id="KGZ" d="M 1388.9,253.3 L 1422.2,253.3 L 1422.2,263.9 L 1400.0,263.9 L 1388.9,263.9 L 1388.9,253.3 Z" onclick="showC('KGZ')"/>
+<path id="IND" d="M 1377.8,285.0 L 1411.1,285.0 L 1422.2,295.6 L 1433.3,316.7 L 1444.4,327.2 L 1455.6,327.2 L 1466.7,332.5 L 1477.8,337.8 L 1488.9,337.8 L 1500.0,358.9 L 1488.9,369.4 L 1477.8,380.0 L 1455.6,401.1 L 1444.4,422.2 L 1433.3,432.8 L 1422.2,432.8 L 1411.1,401.1 L 1400.0,358.9 L 1377.8,348.3 L 1366.7,348.3 L 1377.8,316.7 L 1377.8,285.0 Z" onclick="showC('IND')"/>
+<path id="NPL" d="M 1444.4,316.7 L 1455.6,316.7 L 1466.7,327.2 L 1477.8,327.2 L 1488.9,327.2 L 1488.9,337.8 L 1477.8,337.8 L 1466.7,332.5 L 1455.6,327.2 L 1444.4,327.2 L 1444.4,316.7 Z" onclick="showC('NPL')"/>
+<path id="BTN" d="M 1488.9,327.2 L 1500.0,327.2 L 1511.1,337.8 L 1500.0,337.8 L 1488.9,337.8 L 1488.9,327.2 Z" onclick="showC('BTN')"/>
+<path id="BGD" d="M 1488.9,337.8 L 1500.0,337.8 L 1511.1,348.3 L 1511.1,358.9 L 1500.0,358.9 L 1488.9,348.3 L 1488.9,337.8 Z" onclick="showC('BGD')"/>
+<path id="LKA" d="M 1444.4,422.2 L 1455.6,422.2 L 1455.6,443.3 L 1444.4,438.1 L 1444.4,422.2 Z" onclick="showC('LKA')"/>
+<path id="MMR" d="M 1511.1,327.2 L 1533.3,327.2 L 1544.4,348.3 L 1555.6,369.4 L 1555.6,390.6 L 1544.4,390.6 L 1533.3,380.0 L 1511.1,358.9 L 1500.0,358.9 L 1511.1,348.3 L 1511.1,327.2 Z" onclick="showC('MMR')"/>
+<path id="THA" d="M 1544.4,369.4 L 1555.6,369.4 L 1566.7,380.0 L 1577.8,380.0 L 1566.7,401.1 L 1555.6,422.2 L 1555.6,443.3 L 1544.4,432.8 L 1544.4,411.7 L 1533.3,390.6 L 1533.3,380.0 L 1544.4,369.4 Z" onclick="showC('THA')"/>
+<path id="LAO" d="M 1555.6,358.9 L 1566.7,358.9 L 1577.8,369.4 L 1588.9,380.0 L 1577.8,390.6 L 1566.7,390.6 L 1555.6,380.0 L 1555.6,369.4 L 1555.6,358.9 Z" onclick="showC('LAO')"/>
+<path id="KHM" d="M 1566.7,401.1 L 1577.8,401.1 L 1588.9,411.7 L 1577.8,422.2 L 1566.7,422.2 L 1555.6,411.7 L 1566.7,401.1 Z" onclick="showC('KHM')"/>
+<path id="VNM" d="M 1566.7,358.9 L 1577.8,358.9 L 1588.9,369.4 L 1600.0,390.6 L 1600.0,411.7 L 1588.9,422.2 L 1577.8,422.2 L 1588.9,411.7 L 1577.8,390.6 L 1588.9,380.0 L 1577.8,369.4 L 1566.7,358.9 Z" onclick="showC('VNM')"/>
+<path id="MYS_W" d="M 1555.6,443.3 L 1577.8,443.3 L 1588.9,453.9 L 1577.8,464.4 L 1566.7,464.4 L 1555.6,453.9 L 1555.6,443.3 Z" onclick="showC('MYS')"/>
+<path id="MYS_E" d="M 1633.3,485.6 L 1644.4,475.0 L 1655.6,464.4 L 1655.6,453.9 L 1644.4,453.9 L 1633.3,464.4 L 1633.3,485.6 Z" onclick="showC('MYS')"/>
+<path id="SGP" d="M 1575.6,467.1 L 1577.8,467.1 L 1577.8,469.2 L 1575.6,469.2 L 1575.6,467.1 Z" onclick="showC('SGP')"/>
+<path id="IDN_W" d="M 1533.3,443.3 L 1555.6,453.9 L 1577.8,464.4 L 1588.9,475.0 L 1600.0,485.6 L 1611.1,485.6 L 1633.3,485.6 L 1655.6,496.1 L 1677.8,506.7 L 1688.9,517.2 L 1688.9,506.7 L 1666.7,496.1 L 1644.4,485.6 L 1622.2,475.0 L 1600.0,475.0 L 1588.9,464.4 L 1577.8,453.9 L 1566.7,464.4 L 1533.3,453.9 L 1533.3,443.3 Z" onclick="showC('IDN')"/>
+<path id="IDN_J" d="M 1588.9,506.7 L 1600.0,511.9 L 1622.2,517.2 L 1633.3,517.2 L 1644.4,517.2 L 1655.6,517.2 L 1633.3,506.7 L 1611.1,506.7 L 1594.4,506.7 L 1588.9,506.7 Z" onclick="showC('IDN')"/>
+<path id="IDN_K" d="M 1633.3,464.4 L 1644.4,475.0 L 1655.6,464.4 L 1655.6,453.9 L 1644.4,453.9 L 1633.3,464.4 Z" onclick="showC('IDN')"/>
+<path id="PHL" d="M 1655.6,369.4 L 1666.7,380.0 L 1677.8,401.1 L 1688.9,411.7 L 1700.0,432.8 L 1688.9,432.8 L 1677.8,422.2 L 1666.7,411.7 L 1655.6,390.6 L 1655.6,369.4 Z" onclick="showC('PHL')"/>
+<path id="CHN" d="M 1422.2,263.9 L 1444.4,253.3 L 1466.7,232.2 L 1488.9,221.7 L 1500.0,221.7 L 1533.3,211.1 L 1555.6,211.1 L 1588.9,211.1 L 1611.1,211.1 L 1644.4,221.7 L 1666.7,211.1 L 1677.8,221.7 L 1677.8,253.3 L 1666.7,274.4 L 1655.6,285.0 L 1644.4,295.6 L 1633.3,316.7 L 1622.2,327.2 L 1611.1,348.3 L 1600.0,358.9 L 1577.8,358.9 L 1566.7,358.9 L 1555.6,358.9 L 1544.4,348.3 L 1533.3,327.2 L 1511.1,327.2 L 1488.9,327.2 L 1466.7,327.2 L 1444.4,327.2 L 1433.3,316.7 L 1422.2,295.6 L 1422.2,274.4 L 1422.2,263.9 Z" onclick="showC('CHN')"/>
+<path id="MNG" d="M 1488.9,211.1 L 1533.3,211.1 L 1555.6,211.1 L 1588.9,211.1 L 1611.1,211.1 L 1644.4,221.7 L 1644.4,232.2 L 1622.2,242.8 L 1588.9,242.8 L 1555.6,232.2 L 1533.3,232.2 L 1500.0,232.2 L 1488.9,221.7 L 1488.9,211.1 Z" onclick="showC('MNG')"/>
+<path id="PRK" d="M 1688.9,253.3 L 1700.0,253.3 L 1722.2,263.9 L 1711.1,274.4 L 1700.0,274.4 L 1688.9,263.9 L 1688.9,253.3 Z" onclick="showC('PRK')"/>
+<path id="KOR" d="M 1700.0,274.4 L 1711.1,274.4 L 1722.2,279.7 L 1722.2,290.3 L 1711.1,295.6 L 1700.0,295.6 L 1700.0,285.0 L 1700.0,274.4 Z" onclick="showC('KOR')"/>
+<path id="JPN_H" d="M 1722.2,295.6 L 1733.3,295.6 L 1744.4,285.0 L 1755.6,285.0 L 1766.7,274.4 L 1777.8,263.9 L 1788.9,242.8 L 1777.8,242.8 L 1766.7,263.9 L 1755.6,285.0 L 1744.4,295.6 L 1733.3,306.1 L 1722.2,295.6 Z" onclick="showC('JPN')"/>
+<path id="JPN_K" d="M 1788.9,242.8 L 1800.0,242.8 L 1800.0,253.3 L 1788.9,253.3 L 1788.9,242.8 Z" onclick="showC('JPN')"/>
+<path id="TWN" d="M 1666.7,337.8 L 1677.8,348.3 L 1677.8,358.9 L 1666.7,358.9 L 1666.7,348.3 L 1666.7,337.8 Z" onclick="showC('TWN')"/>
+<path id="MAR" d="M 922.2,327.2 L 955.6,327.2 L 988.9,306.1 L 1011.1,295.6 L 1011.1,290.3 L 1044.4,279.7 L 1044.4,295.6 L 1011.1,295.6 L 988.9,306.1 L 955.6,337.8 L 922.2,337.8 L 922.2,327.2 Z" onclick="showC('MAR')"/>
+<path id="ESH" d="M 922.2,327.2 L 955.6,327.2 L 955.6,348.3 L 922.2,348.3 L 922.2,327.2 Z" onclick="showC('ESH')"/>
+<path id="DZA" d="M 988.9,306.1 L 1011.1,295.6 L 1044.4,279.7 L 1055.6,279.7 L 1055.6,295.6 L 1044.4,316.7 L 1022.2,358.9 L 1000.0,369.4 L 977.8,369.4 L 955.6,369.4 L 933.3,358.9 L 922.2,348.3 L 955.6,348.3 L 955.6,327.2 L 988.9,306.1 Z" onclick="showC('DZA')"/>
+<path id="TUN" d="M 1044.4,279.7 L 1055.6,279.7 L 1055.6,295.6 L 1044.4,295.6 L 1044.4,279.7 Z" onclick="showC('TUN')"/>
+<path id="LBY" d="M 1055.6,295.6 L 1077.8,300.8 L 1111.1,306.1 L 1133.3,306.1 L 1133.3,358.9 L 1066.7,358.9 L 1055.6,348.3 L 1055.6,316.7 L 1055.6,295.6 Z" onclick="showC('LBY')"/>
+<path id="EGY" d="M 1133.3,306.1 L 1177.8,306.1 L 1188.9,316.7 L 1177.8,327.2 L 1155.6,358.9 L 1133.3,358.9 L 1133.3,306.1 Z" onclick="showC('EGY')"/>
+<path id="MRT" d="M 911.1,337.8 L 955.6,337.8 L 955.6,369.4 L 911.1,369.4 L 911.1,337.8 Z" onclick="showC('MRT')"/>
+<path id="MLI" d="M 955.6,369.4 L 977.8,369.4 L 1000.0,369.4 L 1022.2,358.9 L 1022.2,380.0 L 1022.2,401.1 L 1000.0,390.6 L 977.8,401.1 L 955.6,390.6 L 955.6,369.4 Z" onclick="showC('MLI')"/>
+<path id="NER" d="M 1022.2,358.9 L 1044.4,358.9 L 1066.7,358.9 L 1077.8,358.9 L 1077.8,390.6 L 1066.7,406.4 L 1044.4,406.4 L 1022.2,401.1 L 1000.0,390.6 L 1022.2,401.1 L 1022.2,380.0 L 1022.2,358.9 Z" onclick="showC('NER')"/>
+<path id="TCD" d="M 1077.8,358.9 L 1133.3,358.9 L 1133.3,390.6 L 1111.1,395.8 L 1100.0,401.1 L 1088.9,411.7 L 1077.8,411.7 L 1077.8,390.6 L 1077.8,358.9 Z" onclick="showC('TCD')"/>
+<path id="SDN" d="M 1133.3,358.9 L 1177.8,358.9 L 1200.0,358.9 L 1211.1,369.4 L 1211.1,380.0 L 1200.0,380.0 L 1200.0,401.1 L 1188.9,411.7 L 1177.8,411.7 L 1166.7,422.2 L 1155.6,427.5 L 1133.3,422.2 L 1122.2,422.2 L 1122.2,395.8 L 1133.3,390.6 L 1133.3,358.9 Z" onclick="showC('SDN')"/>
+<path id="ERI" d="M 1200.0,380.0 L 1211.1,380.0 L 1233.3,390.6 L 1222.2,401.1 L 1211.1,401.1 L 1200.0,390.6 L 1200.0,380.0 Z" onclick="showC('ERI')"/>
+<path id="ETH" d="M 1200.0,401.1 L 1211.1,401.1 L 1233.3,401.1 L 1244.4,411.7 L 1244.4,422.2 L 1233.3,432.8 L 1211.1,443.3 L 1200.0,432.8 L 1188.9,422.2 L 1177.8,422.2 L 1177.8,411.7 L 1188.9,411.7 L 1200.0,401.1 Z" onclick="showC('ETH')"/>
+<path id="DJI" d="M 1233.3,411.7 L 1244.4,411.7 L 1233.3,422.2 L 1233.3,411.7 Z" onclick="showC('DJI')"/>
+<path id="SOM" d="M 1233.3,411.7 L 1244.4,411.7 L 1277.8,411.7 L 1277.8,422.2 L 1255.6,443.3 L 1233.3,464.4 L 1233.3,443.3 L 1244.4,432.8 L 1233.3,422.2 L 1233.3,411.7 Z" onclick="showC('SOM')"/>
+<path id="SSD" d="M 1133.3,422.2 L 1155.6,427.5 L 1166.7,443.3 L 1177.8,453.9 L 1188.9,453.9 L 1188.9,432.8 L 1200.0,422.2 L 1188.9,411.7 L 1177.8,411.7 L 1166.7,422.2 L 1155.6,427.5 L 1133.3,422.2 Z" onclick="showC('SSD')"/>
+<path id="SEN" d="M 911.1,401.1 L 911.1,411.7 L 922.2,411.7 L 933.3,406.4 L 944.4,406.4 L 933.3,401.1 L 922.2,401.1 L 911.1,401.1 Z" onclick="showC('SEN')"/>
+<path id="GMB" d="M 911.1,403.8 L 922.2,403.8 L 922.2,406.4 L 911.1,406.4 L 911.1,403.8 Z" onclick="showC('GMB')"/>
+<path id="GNB" d="M 911.1,411.7 L 922.2,411.7 L 922.2,416.9 L 911.1,416.9 L 911.1,411.7 Z" onclick="showC('GNB')"/>
+<path id="GIN" d="M 922.2,411.7 L 933.3,406.4 L 944.4,411.7 L 955.6,422.2 L 944.4,432.8 L 933.3,432.8 L 922.2,422.2 L 922.2,411.7 Z" onclick="showC('GIN')"/>
+<path id="SLE" d="M 922.2,422.2 L 933.3,422.2 L 944.4,432.8 L 933.3,432.8 L 922.2,432.8 L 922.2,422.2 Z" onclick="showC('SLE')"/>
+<path id="LBR" d="M 944.4,432.8 L 955.6,432.8 L 955.6,443.3 L 944.4,443.3 L 944.4,432.8 Z" onclick="showC('LBR')"/>
+<path id="CIV" d="M 955.6,422.2 L 977.8,422.2 L 977.8,443.3 L 955.6,448.6 L 955.6,432.8 L 955.6,422.2 Z" onclick="showC('CIV')"/>
+<path id="BFA" d="M 977.8,401.1 L 1000.0,395.8 L 1011.1,411.7 L 1000.0,422.2 L 977.8,422.2 L 977.8,401.1 Z" onclick="showC('BFA')"/>
+<path id="GHA" d="M 1000.0,422.2 L 1011.1,422.2 L 1011.1,448.6 L 1000.0,448.6 L 1000.0,422.2 Z" onclick="showC('GHA')"/>
+<path id="TGO" d="M 1000.0,422.2 L 1011.1,422.2 L 1011.1,443.3 L 1005.6,443.3 L 1000.0,432.8 L 1000.0,422.2 Z" onclick="showC('TGO')"/>
+<path id="BEN" d="M 1011.1,422.2 L 1022.2,422.2 L 1022.2,443.3 L 1011.1,443.3 L 1011.1,432.8 L 1011.1,422.2 Z" onclick="showC('BEN')"/>
+<path id="NGA" d="M 1022.2,401.1 L 1044.4,401.1 L 1066.7,406.4 L 1077.8,411.7 L 1077.8,432.8 L 1055.6,453.9 L 1044.4,453.9 L 1022.2,443.3 L 1022.2,432.8 L 1022.2,422.2 L 1022.2,401.1 Z" onclick="showC('NGA')"/>
+<path id="CMR" d="M 1077.8,411.7 L 1088.9,411.7 L 1088.9,432.8 L 1077.8,453.9 L 1066.7,453.9 L 1055.6,453.9 L 1077.8,432.8 L 1077.8,411.7 Z" onclick="showC('CMR')"/>
+<path id="GNQ" d="M 1044.4,453.9 L 1055.6,464.4 L 1044.4,464.4 L 1044.4,453.9 Z" onclick="showC('GNQ')"/>
+<path id="GAB" d="M 1055.6,453.9 L 1077.8,453.9 L 1066.7,475.0 L 1055.6,485.6 L 1044.4,485.6 L 1044.4,475.0 L 1055.6,464.4 L 1055.6,453.9 Z" onclick="showC('GAB')"/>
+<path id="COG" d="M 1077.8,453.9 L 1088.9,453.9 L 1100.0,464.4 L 1088.9,475.0 L 1077.8,475.0 L 1066.7,475.0 L 1077.8,453.9 Z" onclick="showC('COG')"/>
+<path id="CAF" d="M 1077.8,411.7 L 1088.9,411.7 L 1111.1,422.2 L 1133.3,422.2 L 1133.3,432.8 L 1122.2,443.3 L 1111.1,443.3 L 1100.0,453.9 L 1088.9,453.9 L 1088.9,432.8 L 1077.8,432.8 L 1077.8,411.7 Z" onclick="showC('CAF')"/>
+<path id="COD" d="M 1100.0,464.4 L 1111.1,453.9 L 1122.2,453.9 L 1133.3,453.9 L 1133.3,475.0 L 1144.4,485.6 L 1155.6,496.1 L 1155.6,517.2 L 1133.3,538.3 L 1122.2,527.8 L 1111.1,517.2 L 1088.9,506.7 L 1088.9,485.6 L 1077.8,475.0 L 1088.9,475.0 L 1100.0,464.4 Z" onclick="showC('COD')"/>
+<path id="UGA" d="M 1166.7,453.9 L 1177.8,464.4 L 1177.8,475.0 L 1166.7,475.0 L 1155.6,464.4 L 1166.7,453.9 Z" onclick="showC('UGA')"/>
+<path id="KEN" d="M 1188.9,453.9 L 1211.1,453.9 L 1233.3,464.4 L 1233.3,475.0 L 1222.2,485.6 L 1200.0,496.1 L 1188.9,485.6 L 1188.9,475.0 L 1188.9,453.9 Z" onclick="showC('KEN')"/>
+<path id="RWA" d="M 1155.6,475.0 L 1166.7,475.0 L 1166.7,485.6 L 1155.6,485.6 L 1155.6,475.0 Z" onclick="showC('RWA')"/>
+<path id="BDI" d="M 1155.6,485.6 L 1166.7,485.6 L 1166.7,496.1 L 1155.6,496.1 L 1155.6,485.6 Z" onclick="showC('BDI')"/>
+<path id="TZA" d="M 1188.9,485.6 L 1200.0,485.6 L 1222.2,496.1 L 1222.2,527.8 L 1200.0,538.3 L 1188.9,538.3 L 1166.7,517.2 L 1166.7,496.1 L 1166.7,475.0 L 1177.8,475.0 L 1177.8,485.6 L 1188.9,485.6 Z" onclick="showC('TZA')"/>
+<path id="AGO" d="M 1066.7,475.0 L 1088.9,475.0 L 1100.0,485.6 L 1111.1,496.1 L 1122.2,506.7 L 1122.2,548.9 L 1100.0,548.9 L 1088.9,538.3 L 1077.8,527.8 L 1066.7,506.7 L 1066.7,475.0 Z" onclick="showC('AGO')"/>
+<path id="ZMB" d="M 1122.2,517.2 L 1133.3,517.2 L 1155.6,517.2 L 1177.8,517.2 L 1177.8,538.3 L 1166.7,548.9 L 1155.6,548.9 L 1144.4,538.3 L 1133.3,538.3 L 1122.2,527.8 L 1122.2,517.2 Z" onclick="showC('ZMB')"/>
+<path id="MWI" d="M 1177.8,527.8 L 1188.9,527.8 L 1200.0,548.9 L 1188.9,548.9 L 1177.8,538.3 L 1177.8,527.8 Z" onclick="showC('MWI')"/>
+<path id="MOZ" d="M 1188.9,538.3 L 1200.0,548.9 L 1211.1,570.0 L 1200.0,580.6 L 1188.9,580.6 L 1177.8,570.0 L 1177.8,591.1 L 1200.0,601.7 L 1211.1,580.6 L 1222.2,570.0 L 1200.0,548.9 L 1188.9,538.3 Z" onclick="showC('MOZ')"/>
+<path id="ZWE" d="M 1144.4,570.0 L 1166.7,570.0 L 1177.8,559.4 L 1177.8,570.0 L 1177.8,580.6 L 1155.6,580.6 L 1144.4,580.6 L 1144.4,570.0 Z" onclick="showC('ZWE')"/>
+<path id="BWA" d="M 1111.1,570.0 L 1133.3,570.0 L 1144.4,570.0 L 1144.4,591.1 L 1133.3,601.7 L 1111.1,591.1 L 1111.1,570.0 Z" onclick="showC('BWA')"/>
+<path id="NAM" d="M 1066.7,570.0 L 1100.0,570.0 L 1111.1,570.0 L 1111.1,591.1 L 1100.0,601.7 L 1088.9,612.2 L 1066.7,601.7 L 1066.7,570.0 Z" onclick="showC('NAM')"/>
+<path id="ZAF" d="M 1088.9,622.8 L 1111.1,622.8 L 1133.3,622.8 L 1155.6,622.8 L 1177.8,612.2 L 1177.8,591.1 L 1155.6,591.1 L 1144.4,591.1 L 1133.3,601.7 L 1111.1,601.7 L 1100.0,601.7 L 1088.9,612.2 L 1088.9,622.8 Z" onclick="showC('ZAF')"/>
+<path id="LSO" d="M 1155.6,633.3 L 1166.7,622.8 L 1155.6,622.8 L 1155.6,633.3 Z" onclick="showC('LSO')"/>
+<path id="SWZ" d="M 1177.8,612.2 L 1177.8,622.8 L 1166.7,622.8 L 1177.8,612.2 Z" onclick="showC('SWZ')"/>
+<path id="MDG" d="M 1244.4,538.3 L 1266.7,548.9 L 1277.8,570.0 L 1277.8,601.7 L 1255.6,601.7 L 1244.4,580.6 L 1244.4,559.4 L 1244.4,538.3 Z" onclick="showC('MDG')"/>
+<path id="AUS" d="M 1633.3,591.1 L 1655.6,580.6 L 1677.8,570.0 L 1700.0,548.9 L 1711.1,548.9 L 1733.3,538.3 L 1755.6,538.3 L 1755.6,559.4 L 1777.8,548.9 L 1800.0,548.9 L 1822.2,570.0 L 1844.4,601.7 L 1844.4,633.3 L 1822.2,675.6 L 1800.0,675.6 L 1777.8,665.0 L 1755.6,665.0 L 1722.2,643.9 L 1700.0,654.4 L 1666.7,643.9 L 1644.4,633.3 L 1633.3,612.2 L 1633.3,591.1 Z" onclick="showC('AUS')"/>
+<path id="NZL_N" d="M 1955.6,654.4 L 1966.7,665.0 L 1988.9,675.6 L 1988.9,686.1 L 1966.7,686.1 L 1955.6,675.6 L 1955.6,654.4 Z" onclick="showC('NZL')"/>
+<path id="NZL_S" d="M 1933.3,707.2 L 1955.6,707.2 L 1955.6,723.1 L 1933.3,723.1 L 1933.3,707.2 Z" onclick="showC('NZL')"/>
+<path id="PNG" d="M 1777.8,506.7 L 1811.1,506.7 L 1833.3,496.1 L 1844.4,496.1 L 1822.2,517.2 L 1800.0,517.2 L 1777.8,517.2 L 1777.8,506.7 Z" onclick="showC('PNG')"/>
+      <text x="455.6" y="274.4" class="clabel" onclick="showC('USA')">USA</text>
+<text x="472.2" y="168.9" class="clabel" onclick="showC('CAN')">CAN</text>
+<text x="433.3" y="353.6" class="clabel" onclick="showC('MEX')">MEX</text>
+<text x="766.7" y="95.0" class="clabel" onclick="showC('GRL')">GRL</text>
+<text x="561.1" y="361.5" class="clabel" onclick="showC('CUB')">CUB</text>
+<text x="711.1" y="527.8" class="clabel" onclick="showC('BRA')">BRA</text>
+<text x="638.9" y="654.4" class="clabel" onclick="showC('ARG')">ARG</text>
+<text x="605.6" y="643.9" class="clabel" onclick="showC('CHL')">CHL</text>
+<text x="588.9" y="453.9" class="clabel" onclick="showC('COL')">COL</text>
+<text x="633.3" y="438.1" class="clabel" onclick="showC('VEN')">VEN</text>
+<text x="583.3" y="527.8" class="clabel" onclick="showC('PER')">PER</text>
+<text x="644.4" y="564.7" class="clabel" onclick="showC('BOL')">BOL</text>
+<text x="683.3" y="585.8" class="clabel" onclick="showC('PRY')">PRY</text>
+<text x="688.9" y="649.2" class="clabel" onclick="showC('URY')">URY</text>
+<text x="566.7" y="480.3" class="clabel" onclick="showC('ECU')">ECU</text>
+<text x="672.2" y="448.6" class="clabel" onclick="showC('GUY')">GUY</text>
+<text x="988.9" y="195.3" class="clabel" onclick="showC('GBR')">UK</text>
+<text x="1011.1" y="232.2" class="clabel" onclick="showC('FRA')">FRA</text>
+<text x="1055.6" y="205.8" class="clabel" onclick="showC('DEU')">DEU</text>
+<text x="983.3" y="263.9" class="clabel" onclick="showC('ESP')">ESP</text>
+<text x="1066.7" y="253.3" class="clabel" onclick="showC('ITA')">ITA</text>
+<text x="1105.6" y="200.6" class="clabel" onclick="showC('POL')">POL</text>
+<text x="1172.2" y="216.4" class="clabel" onclick="showC('UKR')">UKR</text>
+<text x="1088.9" y="147.8" class="clabel" onclick="showC('SWE')">SWE</text>
+<text x="1077.8" y="137.2" class="clabel" onclick="showC('NOR')">NOR</text>
+<text x="1144.4" y="137.2" class="clabel" onclick="showC('FIN')">FIN</text>
+<text x="1138.9" y="232.2" class="clabel" onclick="showC('ROU')">ROU</text>
+<text x="1155.6" y="195.3" class="clabel" onclick="showC('BLR')">BLR</text>
+<text x="955.6" y="269.2" class="clabel" onclick="showC('PRT')">PRT</text>
+<text x="1027.8" y="200.6" class="clabel" onclick="showC('NLD')">NLD</text>
+<text x="1022.2" y="208.5" class="clabel" onclick="showC('BEL')">BEL</text>
+<text x="1044.4" y="226.9" class="clabel" onclick="showC('CHE')">CHE</text>
+<text x="1077.8" y="224.3" class="clabel" onclick="showC('AUT')">AUT</text>
+<text x="1105.6" y="226.9" class="clabel" onclick="showC('HUN')">HUN</text>
+<text x="1194.4" y="269.2" class="clabel" onclick="showC('TUR')">TUR</text>
+<text x="1122.2" y="269.2" class="clabel" onclick="showC('GRC')">GRC</text>
+<text x="1138.9" y="248.1" class="clabel" onclick="showC('BGR')">BGR</text>
+<text x="1527.8" y="147.8" class="clabel" onclick="showC('RUS')">RUSSIA</text>
+<text x="1250.0" y="348.3" class="clabel" onclick="showC('SAU')">SAU</text>
+<text x="1300.0" y="306.1" class="clabel" onclick="showC('IRN')">IRN</text>
+<text x="1244.4" y="300.8" class="clabel" onclick="showC('IRQ')">IRQ</text>
+<text x="1211.1" y="290.3" class="clabel" onclick="showC('SYR')">SYR</text>
+<text x="1194.4" y="311.4" class="clabel" onclick="showC('ISR')">ISR</text>
+<text x="1261.1" y="395.8" class="clabel" onclick="showC('YEM')">YEM</text>
+<text x="1316.7" y="369.4" class="clabel" onclick="showC('OMN')">OMN</text>
+<text x="1302.8" y="348.3" class="clabel" onclick="showC('ARE')">UAE</text>
+<text x="1205.6" y="311.4" class="clabel" onclick="showC('JOR')">JOR</text>
+<text x="1016.7" y="327.2" class="clabel" onclick="showC('DZA')">DZA</text>
+<text x="1094.4" y="332.5" class="clabel" onclick="showC('LBY')">LBY</text>
+<text x="1155.6" y="332.5" class="clabel" onclick="showC('EGY')">EGY</text>
+<text x="1044.4" y="427.5" class="clabel" onclick="showC('NGA')">NGA</text>
+<text x="1222.2" y="427.5" class="clabel" onclick="showC('ETH')">ETH</text>
+<text x="1133.3" y="490.8" class="clabel" onclick="showC('COD')">DRC</text>
+<text x="1172.2" y="390.6" class="clabel" onclick="showC('SDN')">SDN</text>
+<text x="1138.9" y="633.3" class="clabel" onclick="showC('ZAF')">ZAF</text>
+<text x="1094.4" y="395.8" class="clabel" onclick="showC('TCD')">TCD</text>
+<text x="1000.0" y="385.3" class="clabel" onclick="showC('MLI')">MLI</text>
+<text x="1050.0" y="385.3" class="clabel" onclick="showC('NER')">NER</text>
+<text x="1100.0" y="533.1" class="clabel" onclick="showC('AGO')">AGO</text>
+<text x="1194.4" y="564.7" class="clabel" onclick="showC('MOZ')">MOZ</text>
+<text x="1255.6" y="443.3" class="clabel" onclick="showC('SOM')">SOM</text>
+<text x="1172.2" y="438.1" class="clabel" onclick="showC('SSD')">SSD</text>
+<text x="1116.7" y="438.1" class="clabel" onclick="showC('CAF')">CAF</text>
+<text x="1211.1" y="475.0" class="clabel" onclick="showC('KEN')">KEN</text>
+<text x="1194.4" y="506.7" class="clabel" onclick="showC('TZA')">TZA</text>
+<text x="1155.6" y="548.9" class="clabel" onclick="showC('ZMB')">ZMB</text>
+<text x="1261.1" y="580.6" class="clabel" onclick="showC('MDG')">MDG</text>
+<text x="972.2" y="306.1" class="clabel" onclick="showC('MAR')">MAR</text>
+<text x="1572.2" y="290.3" class="clabel" onclick="showC('CHN')">CHINA</text>
+<text x="1444.4" y="358.9" class="clabel" onclick="showC('IND')">INDIA</text>
+<text x="1383.3" y="316.7" class="clabel" onclick="showC('PAK')">PAK</text>
+<text x="1361.1" y="300.8" class="clabel" onclick="showC('AFG')">AFG</text>
+<text x="1372.2" y="221.7" class="clabel" onclick="showC('KAZ')">KAZ</text>
+<text x="1533.3" y="369.4" class="clabel" onclick="showC('MMR')">MMR</text>
+<text x="1561.1" y="395.8" class="clabel" onclick="showC('THA')">THA</text>
+<text x="1588.9" y="390.6" class="clabel" onclick="showC('VNM')">VNM</text>
+<text x="1616.7" y="459.2" class="clabel" onclick="showC('MYS')">MYS</text>
+<text x="1655.6" y="485.6" class="clabel" onclick="showC('IDN')">INDO</text>
+<text x="1677.8" y="411.7" class="clabel" onclick="showC('PHL')">PHL</text>
+<text x="1705.6" y="263.9" class="clabel" onclick="showC('PRK')">PRK</text>
+<text x="1711.1" y="285.0" class="clabel" onclick="showC('KOR')">KOR</text>
+<text x="1761.1" y="285.0" class="clabel" onclick="showC('JPN')">JPN</text>
+<text x="1672.2" y="348.3" class="clabel" onclick="showC('TWN')">TWN</text>
+<text x="1583.3" y="232.2" class="clabel" onclick="showC('MNG')">MNG</text>
+<text x="1405.6" y="258.6" class="clabel" onclick="showC('KGZ')">KGZ</text>
+<text x="1350.0" y="258.6" class="clabel" onclick="showC('UZB')">UZB</text>
+<text x="1322.2" y="263.9" class="clabel" onclick="showC('TKM')">TKM</text>
+<text x="1744.4" y="612.2" class="clabel" onclick="showC('AUS')">AUS</text>
+<text x="1961.1" y="696.7" class="clabel" onclick="showC('NZL')">NZL</text>
+      </svg>
+    </div>
+    <div id="cpanel">
+      <span class="pclose" onclick="closeC()">[ × CLOSE // ESC ]</span>
+      <div class="pgrid">
+        <div class="pflag" id="pf">🌍</div>
+        <div><div class="pname" id="pn">—</div><div class="pregion" id="pr">—</div><div id="pm"></div><p class="pdesc" id="pd">—</p></div>
+        <div class="pstats" id="pst"></div>
+        <div class="palc" id="pal"></div>
+      </div>
+    </div>
+    <div class="mhint">▸ CLICK NATION → INTEL BRIEF &nbsp;|&nbsp; CLICK CONFLICT → HIGHLIGHT COUNTRIES ON MAP &nbsp;|&nbsp; ESC TO CLOSE</div>
+  </div>
+  </div>
+</section>
+<section id="conflicts">
+  <div class="wrap">
+    <div class="sh"><div class="stag">// 03 — CONFLICT TRACKER 2026</div><div class="sr"></div></div>
+    <h2 class="stitle">Ongoing <span>Conflicts</span></h2>
+    <p class="cintro">Active armed conflicts, insurgencies, proxy wars, and frozen disputes monitored as of early 2026. Click any conflict card to highlight involved nations on the map. Expand for a beginner-friendly timeline and current mediation status.<br><br><span style="color:#ff2d55">●HOT</span> Active major combat &nbsp;<span style="color:var(--orange)">●WARM</span> Active low-intensity &nbsp;<span style="color:var(--yellow)">●COLD</span> Ceasefire/simmering &nbsp;<span style="color:var(--a)">●FROZEN</span> No active fighting</p>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</section>
+<footer>
+  <div class="flogo">VORTEL</div>
+  <div class="ftxt">© 2026 VORTEL INTELLIGENCE — ALL RIGHTS RESERVED</div>
+  <div class="ftxt" style="color:var(--a);letter-spacing:.3em">GEOPOLITICAL ANALYSIS PLATFORM // EST. 2026</div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;document.getElementById('sb').style.width=p+'%'});
+
+// ── COUNTRY DATA ──
+const CD={
+  GRL:{name:'Greenland',flag:'🇬🇱',region:'ARCTIC // DANISH AUTONOMOUS TERRITORY',mil:'WEAK',desc:'Strategically vital autonomous territory commanding Arctic shipping routes and holding vast rare earth deposits. US acquisition pressure intensified in 2025 under Trump, with Denmark and Greenlandic government firmly rejecting any transfer.',stats:{STATUS:'STRATEGIC INTEREST',POP:'56K',GOVERNANCE:'Danish Autonomy',RESOURCE:'Rare Earths + Oil'},allies:['Denmark','NATO','USA'],rivals:['China (resource interest)']},
+  CAN:{name:'Canada',flag:'🇨🇦',region:'NORTH AMERICA // G7',mil:'MEDIUM',desc:'Facing unprecedented pressure in 2025-26 from US tariff threats and annexation rhetoric. Canada has responded with retaliatory tariffs and elevated defense spending. Arctic sovereignty pressures from Russia and China remain unresolved.',stats:{GDP:'$2.2T',MILITARY:'$28B',NUCLEAR:'No',NATO:'Yes'},allies:['UK','Australia','NATO','Five Eyes'],rivals:['Russia (Arctic)','China','USA (trade tension)']},
+  USA:{name:'United States',flag:'🇺🇸',region:'NORTH AMERICA // SUPERPOWER',mil:'STRONG',desc:'Under Trump\'s second term (2025-), the US has pursued aggressive tariff policies, threatened NATO allies over spending, and sought to retrench from multilateral commitments while confronting China and Iran. Military dominance remains unmatched.',stats:{GDP:'$29T',MILITARY:'$920B',NUCLEAR:'Yes (5,550)',STATUS:'SUPERPOWER'},allies:['UK','Japan','Israel','NATO','AUKUS','Five Eyes'],rivals:['China','Russia','Iran','North Korea']},
+  MEX:{name:'Mexico',flag:'🇲🇽',region:'NORTH AMERICA',mil:'MEDIUM',desc:'Facing US tariff pressure and demands to combat cartel activity. The Sheinbaum government navigates USMCA renegotiation while managing the worst fentanyl-cartel crisis in the country\'s modern history.',stats:{GDP:'$1.5T',MILITARY:'$9B',NUCLEAR:'No',USMCA:'Under pressure'},allies:['Canada','EU'],rivals:['USA (tariffs)','Cartels']},
+  CUB:{name:'Cuba',flag:'🇨🇺',region:'CARIBBEAN // SOCIALIST STATE',mil:'WEAK',desc:'Economic collapse deepened in 2024-25 with 72-hour blackouts and record emigration. Over 1 million Cubans have left since 2022. China and Russia provide limited lifelines.',stats:{GDP:'$0.09T',MILITARY:'$0.5B',STATUS:'ECONOMIC COLLAPSE',EMIGRATION:'1M+ since 2022'},allies:['Russia','Venezuela','China'],rivals:['USA']},
+  COL:{name:'Colombia',flag:'🇨🇴',region:'SOUTH AMERICA',mil:'MEDIUM',desc:'Petro government pursuing controversial "total peace" negotiations with ELN and FARC dissidents. Multiple ceasefires have collapsed. Colombia remains a key US counternarcotics partner under significant strain.',stats:{GDP:'$0.34T',MILITARY:'$14B',NUCLEAR:'No',COCA:'World leader'},allies:['USA','EU'],rivals:['Venezuela','ELN','FARC dissidents']},
+  VEN:{name:'Venezuela',flag:'🇻🇪',region:'SOUTH AMERICA // FAILED STATE',mil:'WEAK',desc:'Maduro claimed victory in the disputed July 2024 election amid mass protests, with the opposition presenting voting tally evidence of a win. Western nations recognize González as legitimate president. Economy remains in freefall.',stats:{GDP:'$0.09T',MILITARY:'$0.5B',STATUS:'DISPUTED STATE',REFUGEES:'7M+ displaced'},allies:['Russia','China','Cuba','Iran'],rivals:['USA','Colombia','Guyana']},
+  BRA:{name:'Brazil',flag:'🇧🇷',region:'SOUTH AMERICA // REGIONAL POWER',mil:'MEDIUM',desc:'Under Lula, Brazil has emerged as a key Global South leader, hosting the 2025 G20 and COP30. Brazil mediated in Venezuela and positions itself as an indispensable partner to both Western and BRICS blocs.',stats:{GDP:'$2.2T',MILITARY:'$20B',NUCLEAR:'No (latent)',BRICS:'Active'},allies:['BRICS','Mercosur','G20'],rivals:[]},
+  ARG:{name:'Argentina',flag:'🇦🇷',region:'SOUTH AMERICA',mil:'WEAK',desc:'Milei\'s chainsaw economic reforms have cut the fiscal deficit to near-zero and reduced inflation from 300% toward 50%, but social costs are severe. Argentina rejected BRICS membership and pivoted sharply toward the US.',stats:{GDP:'$0.65T',MILITARY:'$3B',NUCLEAR:'Latent',STATUS:'SHOCK THERAPY'},allies:['USA','IMF'],rivals:['UK (Falklands)']},
+  CHL:{name:'Chile',flag:'🇨🇱',region:'SOUTH AMERICA',mil:'MEDIUM',desc:'World\'s largest copper and lithium producer increasingly central to the EV supply chain. Chile is developing a state lithium strategy to capture more value from its world-leading reserves.',stats:{GDP:'$0.35T',MILITARY:'$6B',COPPER:'#1 world',LITHIUM:'Top 2 world'},allies:['USA','Pacific Alliance'],rivals:[]},
+  ISL:{name:'Iceland',flag:'🇮🇸',region:'NORTH ATLANTIC // NATO',mil:'WEAK',desc:'No standing army but commands the GIUK Gap — critical NATO submarine choke point. Iceland\'s EEZ has seen increased Russian submarine activity requiring NATO response.',stats:{GDP:'$0.03T',MILITARY:'No army',NATO:'Yes',GIUK:'Critical gap'},allies:['NATO','USA','Nordic'],rivals:['Russia']},
+  GBR:{name:'United Kingdom',flag:'🇬🇧',region:'WESTERN EUROPE // NUCLEAR',mil:'STRONG',desc:'Post-Brexit Britain under the Starmer government has re-engaged with Europe via a Defence and Security Pact (2025) while maintaining AUKUS and the Five Eyes. Defence spending targeted at 2.5% GDP.',stats:{GDP:'$3.2T',MILITARY:'$80B',NUCLEAR:'Yes (225)',NATO:'Yes'},allies:['USA','Australia','AUKUS','Five Eyes','NATO'],rivals:['Russia','China']},
+  FRA:{name:'France',flag:'🇫🇷',region:'WESTERN EUROPE // NUCLEAR',mil:'STRONG',desc:'France is experiencing significant domestic political fragmentation but maintains Europe\'s most capable independent nuclear deterrent and expeditionary force. The Sahel withdrawal is complete. Paris now focuses on European strategic autonomy.',stats:{GDP:'$3.1T',MILITARY:'$60B',NUCLEAR:'Yes (290)',NATO:'Full member'},allies:['EU','NATO','G7'],rivals:['Russia']},
+  DEU:{name:'Germany',flag:'🇩🇪',region:'CENTRAL EUROPE // INDUSTRIAL POWER',mil:'MEDIUM',desc:'The February 2025 election brought a CDU-led coalition. Germany is accelerating defense spending past 2% GDP and funding a €100B special fund for Bundeswehr modernization, responding to the Ukraine war and US pressure.',stats:{GDP:'$4.3T',MILITARY:'$90B+',NUCLEAR:'No (hosts US nukes)',NATO:'Yes'},allies:['NATO','EU','USA','France'],rivals:['Russia']},
+  POL:{name:'Poland',flag:'🇵🇱',region:'EASTERN EUROPE // NATO FRONTLINE',mil:'STRONG',desc:'Poland now spends 4%+ of GDP on defence — the highest in NATO — and is building Europe\'s largest ground army. Warsaw purchased Abrams tanks, F-35s, K2 tanks, HIMARS, and Patriot systems. The frontline NATO state.',stats:{GDP:'$0.85T',MILITARY:'$35B+',NATO:'Yes',TARGET:'Largest EU army by 2030'},allies:['NATO','USA','Baltic states','Ukraine'],rivals:['Russia','Belarus']},
+  UKR:{name:'Ukraine',flag:'🇺🇦',region:'EASTERN EUROPE // ACTIVE WAR',mil:'STRONG',desc:'As of early 2026, the war continues with Russia holding ~20% of Ukrainian territory. Ceasefire talks have resumed under US pressure but no deal reached. Ukraine has struck deep into Russia with drones. NATO membership remains contested.',stats:{GDP:'$0.2T',MILITARY:'$65B+ (aided)',NATO:'Candidate (contested)',STATUS:'⚠ ACTIVE WAR'},allies:['EU','UK','NATO coalition','Poland'],rivals:['Russia','Belarus']},
+  RUS:{name:'Russia',flag:'🇷🇺',region:'EURASIA // NUCLEAR SUPERPOWER',mil:'STRONG',desc:'Russia\'s war economy has mobilized ~40% of GDP toward defense. North Korean troops (10,000+) fight on Russian soil. Ceasefire talks with US mediation are occurring but no agreement as of early 2026. Long-term economic trajectory is negative.',stats:{GDP:'$2.3T',MILITARY:'$120B+',NUCLEAR:'Yes (6,255)',STATUS:'⚠ ACTIVE WAR'},allies:['China','Belarus','North Korea','Iran','CSTO'],rivals:['NATO','Ukraine','EU','USA']},
+  BLR:{name:'Belarus',flag:'🇧🇾',region:'EASTERN EUROPE // RUSSIAN VASSAL',mil:'MEDIUM',desc:'Under Lukashenko, Belarus has hosted Russian tactical nuclear weapons since 2023 and serves as a staging ground for Russian operations. Lukashenko\'s health is reportedly declining, raising succession questions.',stats:{GDP:'$0.07T',MILITARY:'$2B',NUCLEAR:'Russian tactical (hosted)',STATUS:'RUSSIAN VASSAL'},allies:['Russia'],rivals:['Poland','Lithuania','Ukraine','NATO']},
+  TUR:{name:'Türkiye',flag:'🇹🇷',region:'EUROPE/MIDDLE EAST // SWING POWER',mil:'STRONG',desc:'Erdoğan continues exploiting Turkey\'s indispensable position — Bosphorus control, Bayraktar drones, F-16 leverage — to extract maximum concessions. Turkey has normalized with Syria post-Assad and is seeking a role in post-war reconstruction.',stats:{GDP:'$1.2T',MILITARY:'$20B',NUCLEAR:'No (hosts US nukes)',NATO:'Contested'},allies:['NATO (contested)','Azerbaijan','Pakistan'],rivals:['Greece','Kurds']},
+  SYR:{name:'Syria',flag:'🇸🇾',region:'MIDDLE EAST // POST-CIVIL WAR',mil:'WEAK',desc:'HTS-led transitional government has been in power since Assad\'s fall (December 2024). The US lifted sanctions in January 2026 to support reconstruction. Israel continues air strikes on weapons infrastructure. Kurdish SDF controls northeast.',stats:{GDP:'~$0.02T',MILITARY:'Transitional/fragmented',STATUS:'TRANSITIONAL (2025-)',SANCTIONS:'US lifted Jan 2026'},allies:['HTS govt','Turkey (NW Syria)'],rivals:['Iran (former)','Russia (reduced role)']},
+  ISR:{name:'Israel',flag:'🇮🇱',region:'MIDDLE EAST // NUCLEAR STATE',mil:'STRONG',desc:'A ceasefire in Gaza was reached in January 2025 (Phase 1), with hostage exchanges ongoing. Israel struck Iranian nuclear sites in 2024. Hezbollah ceasefire (Nov 2024) holds. Netanyahu faces ICC arrest warrant issued Nov 2024.',stats:{GDP:'$0.55T',MILITARY:'$30B',NUCLEAR:'Undeclared (~90)',ICC:'Arrest warrant (Nov 2024)'},allies:['USA','India'],rivals:['Iran','Hamas','Houthis']},
+  PSE:{name:'Palestine',flag:'🇵🇸',region:'MIDDLE EAST // OCCUPIED',mil:'WEAK',desc:'Gaza ceasefire Phase 1 began January 2025 with hostage-prisoner exchanges. Gaza reconstruction estimated at $80-500B. Hamas significantly degraded but not eliminated. West Bank settler violence escalated. Palestinian Authority governance capacity minimal.',stats:{STATUS:'CEASEFIRE PHASE 1+',CASUALTIES:'50,000+ (Gaza)',RECONSTRUCTION:'$80-500B estimated',WB:'Escalating settler violence'},allies:['Egypt','Qatar (Gaza mediation)','Arab states'],rivals:['Israel','Israel (occupation)']},
+  IRN:{name:'Iran',flag:'🇮🇷',region:'MIDDLE EAST // NUCLEAR THRESHOLD',mil:'STRONG',desc:'After Israel struck Iranian air defenses and nuclear-adjacent sites in October 2024, Iran\'s retaliatory capacity is diminished. Iran has since accelerated uranium enrichment to 60-90%. A new nuclear deal framework is under discussion. The axis of resistance has been severely degraded.',stats:{GDP:'$0.42T',MILITARY:'$10B',NUCLEAR:'60-90% enriched',STATUS:'⚠ NUCLEAR THRESHOLD'},allies:['Russia','China','Houthis'],rivals:['USA','Israel','Saudi Arabia']},
+  SAU:{name:'Saudi Arabia',flag:'🇸🇦',region:'MIDDLE EAST // ENERGY POWER',mil:'STRONG',desc:'Vision 2030 is the dominant strategic framework. Saudi Arabia is actively pursuing a US security guarantee and normalization with Israel contingent on a Palestinian state pathway — the Abraham Accords 2.0 attempt. Oil production policy through OPEC+ remains a key geopolitical tool.',stats:{GDP:'$1.15T',MILITARY:'$80B',OIL:'World #2 producer',OPEC:'Leader'},allies:['USA','UAE','Egypt','Pakistan'],rivals:['Iran','Houthis']},
+  IRQ:{name:'Iraq',flag:'🇮🇶',region:'MIDDLE EAST',mil:'MEDIUM',desc:'Iraq\'s government walks a tightrope between its US security relationship and Iranian-backed PMF militias who command more territory than the army. Following US strikes on PMF targets in 2024, Baghdad demanded a renegotiation of the US military presence.',stats:{GDP:'$0.28T',MILITARY:'$5B',OIL:'OPEC member',STATUS:'DUAL POWER CENTER'},allies:['Iran (PMF)','USA (formal)'],rivals:['ISIS (residual)']},
+  YEM:{name:'Yemen',flag:'🇾🇪',region:'MIDDLE EAST // ACTIVE WAR',mil:'WEAK',desc:'Houthi attacks on Red Sea shipping surpassed 100 incidents. US-UK air campaign (Operation Prosperity Guardian) continues. A Saudi-Houthi de-escalation talks framework collapsed in 2025. Yemen remains the world\'s worst humanitarian crisis.',stats:{GDP:'~$0.015T',MILITARY:'Fragmented',STATUS:'⚠ ACTIVE WAR',RED_SEA:'100+ shipping attacks'},allies:['Houthis: Iran, Russia','Government: Saudi, UAE'],rivals:['Saudi Arabia','USA/UK']},
+  AFG:{name:'Afghanistan',flag:'🇦🇫',region:'SOUTH ASIA // FAILED STATE',mil:'WEAK',desc:'Taliban rule has eliminated girls\' education, banned women from public life, and harbored ISIS-K. No country fully recognizes the Taliban government. Opium production has collapsed under Taliban ban but poverty is extreme.',stats:{GDP:'~$0.014T',MILITARY:'Taliban forces',STATUS:'ISOLATED',WOMEN:'Banned from public life'},allies:['China (limited)','Pakistan (historical)'],rivals:['USA','EU','ISIS-K']},
+  PAK:{name:'Pakistan',flag:'🇵🇰',region:'SOUTH ASIA // NUCLEAR STATE',mil:'STRONG',desc:'Imran Khan remains imprisoned. The military-backed government is managing the worst economic crisis in decades with IMF support. TTP attacks from Afghanistan have escalated. Pakistan-India tensions spiked over Kashmir in 2025.',stats:{GDP:'$0.37T',MILITARY:'$11B',NUCLEAR:'Yes (~170)',STATUS:'POLITICAL CRISIS'},allies:['China','Saudi Arabia','Turkey'],rivals:['India','Afghanistan (TTP)','USA (strained)']},
+  IND:{name:'India',flag:'🇮🇳',region:'SOUTH ASIA // RISING SUPERPOWER',mil:'STRONG',desc:'India has overtaken Japan as the world\'s 4th largest economy. Modi\'s government is navigating strategic autonomy — deepening QUAD ties, purchasing Russian oil, and positioning India as an indispensable manufacturing alternative to China.',stats:{GDP:'$4T+',MILITARY:'$90B',NUCLEAR:'Yes (~170)',STATUS:'#4 ECONOMY / RISING'},allies:['USA (QUAD)','Russia (arms/oil)','Israel','France'],rivals:['China','Pakistan']},
+  CHN:{name:'China',flag:'🇨🇳',region:'EAST ASIA // PEER COMPETITOR',mil:'STRONG',desc:'Xi Jinping\'s third term continues. China\'s economy faces a property crisis, youth unemployment at 20%+, and tech decoupling. PLA exercises around Taiwan have intensified. China\'s Belt and Road continues but with more scrutiny. US-China relations are at historic lows.',stats:{GDP:'$18T',MILITARY:'$250B',NUCLEAR:'Yes (~500)',STATUS:'⚠ SYSTEMIC RIVAL'},allies:['Russia','Pakistan','North Korea'],rivals:['USA','Taiwan','India','Japan','Australia','Philippines']},
+  PRK:{name:'North Korea',flag:'🇰🇵',region:'EAST ASIA // ROGUE NUCLEAR STATE',mil:'STRONG',desc:'DPRK deployed 10,000-15,000 troops to fight alongside Russia in Ukraine — confirmed by US, South Korea and NATO intelligence. In exchange, Russia provides advanced missile technology. Kim Jong-un has declared South Korea an enemy state, not a fellow Korean nation.',stats:{GDP:'~$0.04T',MILITARY:'~$4B',NUCLEAR:'Yes (~50)',TROOPS:'10-15K in Russia'},allies:['Russia (new alliance)','China (reluctant)'],rivals:['USA','South Korea','Japan']},
+  KOR:{name:'South Korea',flag:'🇰🇷',region:'EAST ASIA // TECH POWER',mil:'STRONG',desc:'President Yoon\'s brief martial law declaration in December 2024 triggered his impeachment. The Constitutional Court upheld the impeachment in April 2025. New elections held. South Korea\'s chip industry (Samsung, SK Hynix) remains a critical node in the global tech war.',stats:{GDP:'$1.75T',MILITARY:'$52B',NUCLEAR:'No (US umbrella)',CHIPS:'World #2'},allies:['USA','Japan','Australia'],rivals:['North Korea','China (THAAD)']},
+  JPN:{name:'Japan',flag:'🇯🇵',region:'EAST ASIA // US ALLY',mil:'STRONG',desc:'Japan\'s defense budget reached 2% GDP in 2025 for the first time. Japan acquired Tomahawk missiles for counter-strike capability and is expanding its military industrial base. AUKUS Pillar 2 integration underway.',stats:{GDP:'$4.4T',MILITARY:'$80B',NUCLEAR:'No (US umbrella)',STATUS:'HISTORIC REARMAMENT'},allies:['USA','Australia','South Korea','QUAD'],rivals:['China','North Korea','Russia']},
+  TWN:{name:'Taiwan',flag:'🇹🇼',region:'EAST ASIA // CRITICAL FLASHPOINT',mil:'STRONG',desc:'The world\'s most dangerous potential flashpoint. TSMC produces 92% of advanced chips. China\'s PLA conducted its largest exercise around Taiwan in 2024 (Exercise Joint Sword-2024B). US-Taiwan arms sales continue. Taiwan\'s defense budget raised to 2.45% GDP.',stats:{GDP:'$0.85T',MILITARY:'$20B',TSMC:'92% advanced chips',STATUS:'⚠ CRITICAL FLASHPOINT'},allies:['USA (TRA)','Japan','Australia'],rivals:['China']},
+  AUS:{name:'Australia',flag:'🇦🇺',region:'INDO-PACIFIC // US ALLY',mil:'STRONG',desc:'The first AUKUS nuclear-powered submarine (USS Virginia loaner) began patrols from HMAS Stirling in 2027. Australia is host to expanded US force rotations and has conducted joint South China Sea freedom of navigation operations.',stats:{GDP:'$1.8T',MILITARY:'$34B',NUCLEAR:'No (AUKUS subs operational 2027)',AUKUS:'Active'},allies:['USA','UK','AUKUS','QUAD','Five Eyes'],rivals:['China']},
+  EGY:{name:'Egypt',flag:'🇪🇬',region:'NORTH AFRICA',mil:'STRONG',desc:'Egypt controls the Suez Canal (15% of global shipping) and served as a key Gaza ceasefire mediator alongside Qatar. Egypt\'s economy faces severe IMF debt obligations and the GERD dam dispute with Ethiopia remains unresolved.',stats:{GDP:'$0.4T',MILITARY:'$5B',SUEZ:'Canal control',GERD:'Active dispute'},allies:['USA','Saudi Arabia','UAE'],rivals:['Ethiopia (Nile dam)']},
+  LBY:{name:'Libya',flag:'🇱🇾',region:'NORTH AFRICA',mil:'WEAK',desc:'Libya remains split between Haftar\'s Libyan National Army in the east (backed by Russia/UAE/Egypt) and the GNU in Tripoli. Russia has established a permanent naval base at Tobruk, its first in the Mediterranean since the Soviet era.',stats:{GDP:'$0.05T',MILITARY:'Fragmented factions',STATUS:'DIVIDED STATE',RUSSIA:'Naval base Tobruk'},allies:['East: Russia,UAE,Egypt / West: Turkey,EU'],rivals:['Internal factions']},
+  NGA:{name:'Nigeria',flag:'🇳🇬',region:'WEST AFRICA',mil:'MEDIUM',desc:'Africa\'s most populous nation (220M) managing a severe currency crisis (naira lost 70% in 2023-24), ISWAP insurgency in the northeast killing 10,000+/year, and northern banditry. Tinubu\'s government removed the fuel subsidy in 2023 tripling petrol prices.',stats:{GDP:'$0.5T',MILITARY:'$3.5B',STATUS:'MULTI-CRISIS',OIL:'OPEC member'},allies:['USA','UK','ECOWAS'],rivals:['Boko Haram','ISWAP']},
+  COD:{name:'DR Congo',flag:'🇨🇩',region:'CENTRAL AFRICA',mil:'WEAK',desc:'Rwandan-backed M23 rebels captured Goma (2M people) in January 2025, then Bukavu. SADC forces suffered casualties and partially withdrew. The DRC war is the most consequential resource conflict for the global clean energy transition — cobalt and coltan supply at risk.',stats:{GDP:'$0.06T',MILITARY:'FARDC (weak)',COBALT:'World #1',STATUS:'⚠ ACTIVE CONFLICT'},allies:['AU','Angola (mediator)'],rivals:['Rwanda (M23)','Armed groups']},
+  ETH:{name:'Ethiopia',flag:'🇪🇹',region:'EAST AFRICA',mil:'MEDIUM',desc:'Post-Tigray ceasefire (Nov 2022) holding but Amhara conflict continues (2023-). The GERD dam has reached 85% capacity, directly threatening Egypt\'s water supply. Ethiopia\'s Somaliland sea access deal has been partially suspended under Somali government pressure.',stats:{GDP:'$0.17T',MILITARY:'$1B',STATUS:'POST-CONFLICT/ONGOING',GERD:'85% capacity'},allies:['China','UAE','Turkey'],rivals:['Egypt (dam)','Eritrea']},
+  SOM:{name:'Somalia',flag:'🇸🇴',region:'HORN OF AFRICA',mil:'WEAK',desc:'Al-Shabaab controls 20-30% of Somalia\'s territory despite US drone strikes and the transition from ATMIS to AUSSOM (AU peacekeeping force). The security handover from AU to Somali forces by 2026 is behind schedule.',stats:{GDP:'$0.01T',MILITARY:'Weak federal',STATUS:'⚠ INSURGENCY',AL_SHABAAB:'Controls 20-30% territory'},allies:['USA','AU (AUSSOM)','Turkey','UAE'],rivals:['Al-Shabaab']},
+  SSD:{name:'South Sudan',flag:'🇸🇸',region:'EAST AFRICA // FAILED STATE',mil:'WEAK',desc:'South Sudan\'s fragile peace collapsed in 2023. Renewed conflict between SSPDF and SPLM-IO has created famine conditions for 7M+ people. Sudan\'s civil war has cut the oil pipeline that funds both governments.',stats:{GDP:'~$0.005T',MILITARY:'Factions',STATUS:'⚠ CONFLICT',FAMINE:'7M at risk'},allies:['Uganda','AU'],rivals:['Internal factions']},
+  SDN:{name:'Sudan',flag:'🇸🇩',region:'NORTHEAST AFRICA',mil:'MEDIUM',desc:'The SAF vs RSF civil war (2023-) has created one of the world\'s worst humanitarian crises: 150,000+ killed, 10M displaced, famine declared in parts. Khartoum largely destroyed. UAE reportedly supplied RSF. No ceasefire as of 2026.',stats:{GDP:'~$0.02T',MILITARY:'SAF vs RSF',STATUS:'⚠ CIVIL WAR',DISPLACED:'10M+'},allies:['SAF: Egypt,Gulf / RSF: UAE,Wagner'],rivals:['Internal — SAF vs RSF']},
+  MLI:{name:'Mali',flag:'🇲🇱',region:'WEST AFRICA // COUP STATE',mil:'WEAK',desc:'Wagner/Africa Corps and Malian forces suffered a devastating ambush at Tinzaouaten (July 2024) losing 80+ fighters. JNIM controls large territories. The junta has expelled all Western forces and democratic processes remain suspended.',stats:{GDP:'$0.02T',MILITARY:'$0.5B',STATUS:'JUNTA/INSURGENCY',WAGNER:'Active (Africa Corps)'},allies:['Russia (Africa Corps)','Burkina Faso','Niger'],rivals:['France','ECOWAS','JNIM']},
+  ZAF:{name:'South Africa',flag:'🇿🇦',region:'SOUTHERN AFRICA',mil:'MEDIUM',desc:'The 2024 election ended ANC majority rule for the first time. A Government of National Unity (ANC+DA+IFP) was formed. South Africa\'s ICJ case against Israel continues. Eskom load-shedding crisis is finally easing after new capacity comes online.',stats:{GDP:'$0.42T',MILITARY:'$3.5B',NUCLEAR:'Dismantled (1989)',GNU:'ANC+DA+IFP (2024)'},allies:['BRICS','AU'],rivals:['USA (strained)']},
+  MMR:{name:'Myanmar',flag:'🇲🇲',region:'SOUTHEAST ASIA // CIVIL WAR',mil:'MEDIUM',desc:'By 2025, resistance forces (PDF + EAOs) control over 60% of Myanmar\'s territory. The junta has lost Lashio, Hsipaw, and multiple key towns. China brokered ceasefires in border areas to protect BRI interests. Junta conscription failing.',stats:{GDP:'$0.07T',MILITARY:'Junta collapsing',STATUS:'⚠ CIVIL WAR',TERRITORY:'Junta losing rapidly'},allies:['China (junta)','Russia (junta)'],rivals:['PDF + Ethnic Armed Orgs']},
+  PHL:{name:'Philippines',flag:'🇵🇭',region:'SOUTHEAST ASIA // US ALLY',mil:'MEDIUM',desc:'Philippine coast guard vessels face daily Chinese water cannon attacks at Second Thomas Shoal. The Philippines-US alliance has been reinforced with 9 new base access agreements. Marcos has broken with his predecessor\'s China-accommodating policy.',stats:{GDP:'$0.42T',MILITARY:'$5B',STATUS:'⚠ SCS FRONTLINE',BASES:'9 US base access'},allies:['USA','Japan','Australia'],rivals:['China']},
+  IDN:{name:'Indonesia',flag:'🇮🇩',region:'SOUTHEAST ASIA',mil:'MEDIUM',desc:'New president Prabowo took office in October 2024, signaling more assertive defense policy. Indonesia\'s Natuna Sea tensions with China continue. World-leading nickel reserves make it central to EV supply chain competition.',stats:{GDP:'$1.5T',MILITARY:'$10B',NICKEL:'World #1',STATUS:'NEW LEADERSHIP'},allies:['ASEAN','G20','Non-Aligned'],rivals:['China (Natuna EEZ)']},
+  VNM:{name:'Vietnam',flag:'🇻🇳',region:'SOUTHEAST ASIA',mil:'STRONG',desc:'Vietnam is the biggest beneficiary of supply chain diversification from China. Manufacturing FDI has surged. Vietnam maintains "bamboo diplomacy" — balancing US, China, and Russia relationships simultaneously. South China Sea tensions with China persist.',stats:{GDP:'$0.45T',MILITARY:'$7.5B',FDI:'Supply chain boom',SCS:'Active dispute'},allies:['USA (strategic)','Russia (arms, declining)'],rivals:['China (SCS)']},
+  KAZ:{name:'Kazakhstan',flag:'🇰🇿',region:'CENTRAL ASIA',mil:'MEDIUM',desc:'Kazakhstan has become a key trans-shipment hub for sanctions-busting trade with Russia while publicly distancing itself from Moscow\'s war. Uranium exports dominate strategic importance.',stats:{GDP:'$0.27T',MILITARY:'$2.2B',URANIUM:'World #1',OIL:'Major exporter'},allies:['China (SCO)','West (hedging)'],rivals:[]},
+  NER:{name:'Niger',flag:'🇳🇪',region:'WEST AFRICA // COUP STATE',mil:'WEAK',desc:'The 2023 coup expelled US and French forces. US withdrawal from Agadez Air Base completed 2024, ending 10 years of counter-terrorism operations. Russia\'s Africa Corps has deployed. Niger has revoked uranium mining licenses held by French Orano.',stats:{GDP:'$0.016T',MILITARY:'$0.2B',URANIUM:'5% world output',STATUS:'COUP/ANTI-WESTERN'},allies:['Russia','Mali','Burkina Faso'],rivals:['France','USA','ECOWAS']},
+  MOZ:{name:'Mozambique',flag:'🇲🇿',region:'SOUTHERN AFRICA',mil:'WEAK',desc:'Post-election violence in late 2024 paralyzed the country for months after disputed results. The ISIS insurgency in Cabo Delgado continues. TotalEnergies LNG project partially resumed under Rwandan military protection.',stats:{GDP:'$0.02T',MILITARY:'$0.1B',STATUS:'POST-ELECTION CRISIS',LNG:'Partial resumption'},allies:['SADC','Rwanda (deployed)'],rivals:['ISIS-Mozambique']},
+  CAF:{name:'Central African Republic',flag:'🇨🇫',region:'CENTRAL AFRICA',mil:'WEAK',desc:'Russia\'s Africa Corps (former Wagner) has 2,000+ personnel in CAF, protecting Touadéra\'s government and extracting gold, diamonds, and timber. CAR is the most entrenched example of Russian mercenary state capture in Africa.',stats:{GDP:'$0.003T',MILITARY:'Wagner-dependent',STATUS:'AFRICA CORPS STATE',RUSSIA:'2,000+ troops'},allies:['Russia (Africa Corps)','China'],rivals:['ICC','Western sanctions']},
+};
+
+function milBadge(l){const m={STRONG:['ms','◈ HIGH CAPABILITY'],MEDIUM:['mm','◇ MEDIUM CAPABILITY'],WEAK:['mw','◌ LIMITED CAPABILITY']};const[c,t]=m[l]||m.WEAK;return`<span class="mbadge ${c}">${t}</span>`}
+
+let aCodes=[];
+function showC(code){
+  const d=CD[code];if(!d)return;
+  clearHL();
+  // Match paths by id starting with code (handles _W, _E, _N, _S, _H, _K, _J suffixes)
+  document.querySelectorAll('#wmap path').forEach(p=>{
+    const id=p.id;
+    if(id===code||id.startsWith(code+'_')||(code==='IDN'&&id.startsWith('IDN'))||(code==='RUS'&&(id==='RUS_W'||id==='RUS_E'))||(code==='JPN'&&id.startsWith('JPN'))||(code==='NZL'&&id.startsWith('NZL'))||(code==='MYS'&&id.startsWith('MYS'))||(code==='USA'&&id==='AK')){
+      p.classList.add('active');aCodes.push(p);
+    }
+  });
+
+  document.getElementById('pf').textContent=d.flag;
+  document.getElementById('pn').textContent=d.name;
+  document.getElementById('pr').textContent=d.region;
+  document.getElementById('pm').innerHTML=milBadge(d.mil);
+  document.getElementById('pd').textContent=d.desc;
+  let sh='';for(const[k,v]of Object.entries(d.stats))sh+=`<div class="ps"><div class="psl">${k.replace(/_/g,' ')}</div><div class="psv">${v}</div></div>`;
+  document.getElementById('pst').innerHTML=sh;
+  let ah=`<div class="palt all">// ALLIES &amp; PARTNERS</div><div class="pall">${(d.allies||[]).map(a=>`<span class="ptag al">${a}</span>`).join('')}</div>`;
+  if(d.rivals?.length)ah+=`<div class="palt riv" style="margin-top:.6rem">// RIVALS &amp; ADVERSARIES</div><div class="pall">${d.rivals.map(r=>`<span class="ptag ri">${r}</span>`).join('')}</div>`;
+  document.getElementById('pal').innerHTML=ah;
+  const p=document.getElementById('cpanel');p.classList.add('on');
+  setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+}
+function clearHL(){
+  // Remove all highlight classes from tracked elements
+  aCodes.forEach(e=>{
+    e.classList.remove('active','conflict-hot','conflict-warm','conflict-cold','conflict-frozen');
+  });
+  aCodes=[];
+  // Also clean any stray highlights
+  document.querySelectorAll('#wmap path.active,#wmap path[class*="conflict-"]').forEach(e=>{
+    e.classList.remove('active','conflict-hot','conflict-warm','conflict-cold','conflict-frozen');
+  });
+}
+function closeC(){document.getElementById('cpanel').classList.remove('on');clearHL();currentConflict=null}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeC()});
+
+// ── CONFLICT DATA 2026 ──
+const CONFLICTS=[
+{id:'ukr',name:'Russia–Ukraine War',loc:'Eastern Europe',i:'hot',since:'Feb 24, 2022',
+desc:'Russia\'s full-scale invasion of Ukraine — the largest European land war since 1945. As of early 2026, Russia controls ~20% of Ukrainian territory. North Korean troops (10,000-15,000) fight on Russian lines. Ceasefire talks facilitated by the US have started but no agreement reached.',
+parties:{red:['Russia','North Korea (10-15K troops)','Belarus (support)'],blue:['Ukraine'],gray:['NATO coalition (arms/intel)','USA (Ramstein format)']},
+tags:['1,000km frontline','Nuclear risk','Drone warfare','NK troops'],
+countries:{hot:['UKR','RUS','RUS_W','RUS_E'],warm:['BLR'],cold:[]},
+timeline:[
+  {y:'2014',t:'Russia annexes Crimea; war begins in Donbas with Russian-backed separatists'},
+  {y:'2022',t:'Feb 24: Russia launches full-scale invasion. Kyiv siege fails. Russia withdraws to eastern/southern Ukraine'},
+  {y:'2022',t:'Oct: Russia annexes 4 Ukrainian oblasts (partial control). Kherson city liberated Nov 2022'},
+  {y:'2023',t:'Ukrainian summer counter-offensive makes limited gains. Battle of Bakhmut lasts months'},
+  {y:'2024',t:'Russia advances slowly. Ukraine strikes deep inside Russia with long-range drones/missiles. NK troops confirmed'},
+  {y:'2025',t:'Trump re-elected; pressures both sides toward ceasefire. Peace talks begin but stall over territory'},
+  {y:'2026',t:'Status quo: Russia holds ~20%, ceasefire talks ongoing, no deal. War drags on'}
+],
+mediation:'Active US-led mediation under Trump\'s envoy Kellogg. Saudi Arabia and Türkiye have offered to host talks. No ceasefire deal as of early 2026. Core stalemate: Ukraine refuses to cede occupied territory; Russia demands recognition of annexations.'},
+
+{id:'gaza',name:'Israel–Gaza War',loc:'Middle East',i:'warm',since:'Oct 7, 2023',
+desc:'Hamas\'s October 7 attack killed ~1,200 Israelis. Israel\'s response killed 50,000+ Palestinians in Gaza. A ceasefire Phase 1 began January 19, 2025 with hostage-prisoner exchanges. Phases 2 and 3 stalled. Sporadic fighting resumes.',
+parties:{red:['Hamas','Palestinian Islamic Jihad'],blue:['Israel (IDF)'],gray:['USA (arms/diplomacy)','Egypt/Qatar (mediators)']},
+tags:['Phase 1 ceasefire','ICC arrest warrants','Humanitarian crisis','Hostage deal'],
+countries:{hot:['ISR','PSE'],warm:[],cold:['LBN']},
+timeline:[
+  {y:'1948',t:'Israel founded. Palestinian displacement (Nakba). Gaza under Egyptian, then Israeli control (1967)'},
+  {y:'2007',t:'Hamas takes over Gaza after defeating Fatah. Israel-Egypt blockade begins'},
+  {y:'2023',t:'Oct 7: Hamas kills 1,200 Israelis, takes 251 hostages. Israel declares war, invades Gaza'},
+  {y:'2024',t:'Rafah offensive. 50,000+ Palestinian deaths. ICJ rules genocide plausible. ICC issues Netanyahu warrant'},
+  {y:'Jan 2025',t:'Phase 1 ceasefire begins. 33 Israeli hostages for 1,900 Palestinian prisoners exchanged'},
+  {y:'2025',t:'Phase 2 talks stall. Netanyahu resists full withdrawal. Sporadic IDF operations resume in Gaza'},
+  {y:'2026',t:'Gaza ceasefire fragile. Reconstruction $80-500B. No political solution agreed. 80%+ of Gaza destroyed'}
+],
+mediation:'Egypt, Qatar, and US have mediated all ceasefire phases. Phase 2 (permanent ceasefire + Israeli withdrawal) stalled because Israel rejects Hamas governing Gaza. Saudi normalization with Israel conditional on Palestinian state pathway — the Abraham Accords 2.0 attempt.'},
+
+{id:'sudan',name:'Sudan Civil War',loc:'Northeast Africa',i:'hot',since:'Apr 15, 2023',
+desc:'War between Sudan\'s army (SAF) and the Rapid Support Forces (RSF) paramilitary. Khartoum largely destroyed. 150,000+ killed. 10M+ displaced — one of the world\'s worst humanitarian crises. UAE reportedly supplied RSF; Egypt backs SAF.',
+parties:{red:['RSF (+UAE)'],blue:['SAF (+Egypt)'],gray:['Civilian population','UN (humanitarian)']},
+tags:['10M displaced','Famine declared','Khartoum destroyed','Proxy war'],
+countries:{hot:['SDN'],warm:['TCD','SSD'],cold:[]},
+timeline:[
+  {y:'2019',t:'Omar al-Bashir overthrown. Joint military-civilian transitional government formed'},
+  {y:'2021',t:'Military coup. SAF Gen. Burhan and RSF Gen. Dagalo (Hemeti) seize power together'},
+  {y:'2023',t:'Apr 15: SAF vs RSF fighting erupts in Khartoum over RSF integration into the army'},
+  {y:'2023',t:'Khartoum reduced to rubble. Darfur atrocities. International evacuation of foreign nationals'},
+  {y:'2024',t:'RSF captures most of Khartoum. Famine declared in Darfur. 10M displaced'},
+  {y:'2025',t:'SAF counter-offensive. RSF advances in Darfur and Kordofan. No meaningful ceasefire'},
+  {y:'2026',t:'War ongoing. Africa\'s worst humanitarian crisis. No political solution in sight'}
+],
+mediation:'Jeddah Process (US+Saudi mediation) produced a humanitarian agreement but no ceasefire. AU and IGAD mediation efforts ongoing but sidelined. UAE accused of arming RSF, complicating international pressure. No meaningful negotiations as of 2026.'},
+
+{id:'drc',name:'DRC / Eastern Congo War',loc:'Central Africa',i:'hot',since:'2022 (current phase)',
+desc:'Rwandan-backed M23 rebels captured Goma (2M people) in January 2025, then Bukavu. South African SADC troops engaged. The DRC war threatens global clean energy supply chains — DR Congo produces 70% of world cobalt.',
+parties:{red:['M23 (+ Rwanda FARDC support)'],blue:['DRC FARDC (+ SADC forces)'],gray:['UN MONUSCO','Angola (mediator)']},
+tags:['Cobalt/coltan supply','Goma captured','SADC troops killed','Rwanda-DRC conflict'],
+countries:{hot:['COD','RWA'],warm:['UGA','BDI'],cold:[]},
+timeline:[
+  {y:'1994',t:'Rwanda genocide spills into DRC (then Zaire). Congolese wars begin. Millions die over two decades'},
+  {y:'2012',t:'M23 first rebellion. Rwanda support documented. M23 captures Goma briefly. Peace deal collapses 2013'},
+  {y:'2022',t:'M23 revived. UNHCR and US document Rwandan army (RDF) operating inside DRC'},
+  {y:'2023',t:'M23 advances throughout North Kivu. SADC force deployed. Luanda process negotiations'},
+  {y:'2025',t:'Jan: M23 captures Goma (2M people). Feb: Bukavu falls. SADC troops killed. Displacement surges'},
+  {y:'2026',t:'M23 holds eastern DRC. DRC-Rwanda in open war. Cobalt supply routes disrupted'}
+],
+mediation:'Angola\'s President Lourenço mediating (Luanda Process). Qatar and Kenya also involved. Direct DRC-Rwanda talks in Doha (2025) collapsed. AU summit demanded Rwanda withdraw. No ceasefire as of early 2026.'},
+
+{id:'yemen',name:'Yemen War & Red Sea Crisis',loc:'Middle East',i:'hot',since:'2015 / 2023 (Red Sea)',
+desc:'Houthi forces (Iran-backed) control northern Yemen and have attacked 100+ commercial vessels in the Red Sea, disrupting 15% of global trade. US-UK Operation Prosperity Guardian airstrikes continue. A Saudi-Houthi de-escalation collapsed in 2025.',
+parties:{red:['Houthis / Ansar Allah (+Iran)'],blue:['Yemen Government (+Saudi/UAE)'],gray:['USA/UK (Red Sea strikes)','UN (humanitarian)']},
+tags:['100+ shipping attacks','Red Sea crisis','15% global trade','Iran-proxy'],
+countries:{hot:['YEM'],warm:['IRN'],cold:['SAU']},
+timeline:[
+  {y:'2015',t:'Saudi coalition intervenes after Houthis seize Sanaa and advance south. US supports coalition'},
+  {y:'2018',t:'Houthis retain Sanaa + north Yemen. Battle of Hodeidah. Millions face famine'},
+  {y:'2022',t:'UN-brokered truce holds for 18 months. Prisoner exchanges. Some de-escalation'},
+  {y:'2023',t:'Oct: After Gaza war begins, Houthis launch Red Sea shipping attacks in solidarity'},
+  {y:'2024',t:'100+ commercial vessels attacked. US-UK bomb Houthi sites. Suez Canal traffic drops 50%'},
+  {y:'2025',t:'Saudi-Houthi talks resume and collapse. Houthis expand drone range to hit Israeli targets'},
+  {y:'2026',t:'Red Sea crisis ongoing. No peace deal. Yemen remains world\'s worst humanitarian crisis'}
+],
+mediation:'UN envoy Hans Grundberg leads Yemen peace process — stalled. Saudi-Houthi direct talks collapsed 2025. Oman serves as quiet backchannel between Houthis and USA. Red Sea crisis has no negotiated solution; military pressure continues.'},
+
+{id:'myanmar',name:'Myanmar Civil War',loc:'Southeast Asia',i:'hot',since:'Feb 1, 2021',
+desc:'Following the military coup, resistance forces (PDF + Ethnic Armed Orgs) have captured over 60% of territory the junta held in 2021, including major regional capitals. The junta\'s control is crumbling. China brokered local ceasefires to protect border trade.',
+parties:{red:['Tatmadaw / SAC Junta'],blue:['PDF + Brotherhood Alliance EAOs'],gray:['China (border ceasefires)','ASEAN (limited)']},
+tags:['Junta losing','60% territory lost','China-brokered ceasefires','Anti-coup resistance'],
+countries:{hot:['MMR'],warm:[],cold:['THA','CHN']},
+timeline:[
+  {y:'2021',t:'Feb 1: Military coup. Aung San Suu Kyi arrested. Mass protests. Crackdown kills hundreds'},
+  {y:'2021',t:'People\'s Defence Force (PDF) formed. Joins Ethnic Armed Organisations. Civil war begins'},
+  {y:'2023',t:'Operation 1027: Three Brotherhood Alliance captures major towns in Shan State. Massive junta losses'},
+  {y:'2024',t:'Lashio, Hsipaw, Loikaw, Hakha fall to resistance. Junta conscription fails. Air strikes on civilians'},
+  {y:'2025',t:'China brokers ceasefire in Shan State to protect BRI. Junta controls under 40% of country'},
+  {y:'2026',t:'Junta collapsing. Multiple parallel governments emerging. No clear end to conflict'}
+],
+mediation:'ASEAN\'s 5-Point Consensus has completely failed — junta ignores it. China brokered local ceasefires in Shan State to protect border trade and BRI investments. No international mediation has gained traction. The NUG (shadow government) seeks UN recognition.'},
+
+{id:'sahel',name:'Sahel Jihadist Insurgency',loc:'West Africa',i:'hot',since:'2012',
+desc:'JNIM and ISGS/ISIL-Sahel groups have destabilized Mali, Burkina Faso, and Niger. All three are now under military juntas that expelled French and US forces, inviting Russian Africa Corps. Jihadist territory is expanding southward toward Benin, Togo, and Ghana\'s northern regions.',
+parties:{red:['JNIM (AQ affiliate)','ISGS/ISIL-Sahel'],blue:['Sahel AES juntas','ECOWAS coastal states'],gray:['Russia Africa Corps','France (expelled)','USA (expelled from Niger)']},
+tags:['AES Alliance of juntas','Wagner/Africa Corps','Expanding south','French expelled'],
+countries:{hot:['MLI','BFA','NER'],warm:['NGA','TCD','BEN','GHA'],cold:[]},
+timeline:[
+  {y:'2012',t:'AQIM launches insurgency in northern Mali. France intervenes (Operation Serval 2013)'},
+  {y:'2013',t:'France launches Operation Barkhane. Temporary stabilization'},
+  {y:'2020',t:'Mali coup #1. Insurgency spreads to Burkina Faso and Niger'},
+  {y:'2021',t:'Mali coup #2. France expelled. Wagner arrives. Violence increases, not decreases'},
+  {y:'2023',t:'Niger coup. US expelled from Agadez base. AES (Mali+BF+Niger) alliance formed'},
+  {y:'2024',t:'Wagner ambush at Tinzaouaten: 80+ killed. Jihadists expand toward coastal West Africa'},
+  {y:'2026',t:'Three coup states under AES bloc. Africa Corps active. Jihadists threatening coastal countries'}
+],
+mediation:'No active mediation. ECOWAS imposed sanctions on coup states but has limited leverage. The AES bloc has formally withdrawn from ECOWAS. Algeria attempted mediation in Mali — failed. UN has limited access.'},
+
+{id:'somalia',name:'Somalia: Al-Shabaab Insurgency',loc:'Horn of Africa',i:'warm',since:'2006',
+desc:'Al-Shabaab controls 20-30% of Somalia despite US drone strikes and AU peacekeepers. The handover from ATMIS to AUSSOM (new AU mission) is behind schedule. Al-Shabaab has expanded attacks into Kenya, Ethiopia, and Uganda.',
+parties:{red:['Al-Shabaab (AQ affiliate)'],blue:['Somali Federal Government'],gray:['USA AFRICOM (drone strikes)','AU AUSSOM']},
+tags:['20-30% territory','AQ affiliate','Regional expansion','US drones ongoing'],
+countries:{hot:['SOM'],warm:['ETH','KEN'],cold:[]},
+timeline:[
+  {y:'2006',t:'Islamic Courts Union takes Mogadishu. Ethiopia invades. Al-Shabaab splinters off'},
+  {y:'2011',t:'AU forces push Al-Shabaab from Mogadishu. Famine kills 250,000'},
+  {y:'2011-17',t:'Al-Shabaab loses cities but retains rural territory. Guerrilla war continues'},
+  {y:'2017-22',t:'US AFRICOM escalates drone strikes. Effective but Al-Shabaab adapts'},
+  {y:'2023',t:'Transition from AMISOM to ATMIS to AUSSOM. Somali forces unprepared for handover'},
+  {y:'2026',t:'Al-Shabaab still controls 20-30% of territory. Security handover behind schedule'}
+],
+mediation:'No mediation with Al-Shabaab. The group demands full withdrawal of foreign forces and implementation of Islamic law. The Somali government pursues military defeat strategy with US/AU support. Some local clan engagement.'},
+
+{id:'nigeria',name:'Nigeria: ISWAP & Banditry',loc:'West Africa',i:'warm',since:'2009',
+desc:'ISWAP controls Lake Chad Basin territory and kills 10,000+/year. The northwest banditry crisis kills more Nigerians annually than the northeast insurgency. Nigeria\'s security forces are overstretched.',
+parties:{red:['ISWAP (IS affiliate)','Northwest Bandits'],blue:['Nigerian Armed Forces','MNJTF (Lake Chad)'],gray:['USA (ISR support)']},
+tags:['10,000+ dead/year','ISWAP + Bandits','Lake Chad Basin','Overstretched military'],
+countries:{hot:['NGA'],warm:['NER','TCD','CMR'],cold:[]},
+timeline:[
+  {y:'2009',t:'Boko Haram founded. Radical Islamist uprising in northeast Nigeria'},
+  {y:'2014',t:'Boko Haram declares caliphate. Kidnaps 276 Chibok schoolgirls'},
+  {y:'2016',t:'ISWAP splinters from Boko Haram, pledges to ISIS. More effective militarily'},
+  {y:'2021',t:'Boko Haram leader Shekau killed. ISWAP absorbs most remnants'},
+  {y:'2022',t:'Northwest banditry crisis intensifies — kidnappings, mass killings'},
+  {y:'2026',t:'ISWAP holds territory. Banditry ongoing. Nigeria security crisis multi-front'}
+],
+mediation:'No credible mediation with ISWAP. Some state governments have paid bandits for temporary ceasefires — widely criticized. Lake Chad Basin Commission coordinates military response. USA provides intelligence support.'},
+
+{id:'taiwan',name:'Taiwan Strait Tensions',loc:'East Asia',i:'cold',since:'1949',
+desc:'China conducted its largest military exercises around Taiwan in May 2024 (Joint Sword-2024B). The US continues arms sales and maintains strategic ambiguity on defending Taiwan. Taiwan raised defense spending to 2.45% GDP. The most consequential potential conflict in the world.',
+parties:{red:['China PLA/PLAN'],blue:['Taiwan (ROC)'],gray:['USA (TRA)','Japan','Australia']},
+tags:['⚠ Critical flashpoint','Semiconductor war','US deterrence','Joint Sword exercises'],
+countries:{hot:[],warm:['CHN','TWN'],cold:['USA','JPN','AUS','PHL']},
+timeline:[
+  {y:'1949',t:'Chinese civil war ends. ROC retreats to Taiwan. PRC founded. Separation begins'},
+  {y:'1954-58',t:'Taiwan Strait crises. US 7th Fleet intervenes. Status quo established'},
+  {y:'1996',t:'PLA missile tests during Taiwan election. US carriers deployed. Beijing backs down'},
+  {y:'2022',t:'Pelosi visits Taiwan. China conducts largest exercises since 1996. Blockade simulation'},
+  {y:'2024',t:'Joint Sword-2024B: China simulates full blockade after Taiwan president Lai inaugurated'},
+  {y:'2025',t:'China increases daily gray-zone pressure: coast guard, air incursions. TSMC expansion overseas'},
+  {y:'2026',t:'No invasion. Gray-zone pressure constant. US-Taiwan arms sales continue. Deterrence holding'}
+],
+mediation:'No mediation — China considers Taiwan an internal matter. US maintains "One China policy" while selling arms under the TRA. No international body mediates. Deterrence through ambiguity is the current Western strategy.'},
+
+{id:'scs',name:'South China Sea Disputes',loc:'Southeast Asia',i:'cold',since:'Ongoing',
+desc:'China asserts near-total sovereignty via the "Nine-Dash Line" (ruled illegal by UNCLOS Tribunal 2016). Near-daily confrontations between Chinese coast guard and Philippine vessels at Second Thomas Shoal. US conducts Freedom of Navigation Operations.',
+parties:{red:['China (Coast Guard/PLAN)'],blue:['Philippines','Vietnam','Malaysia'],gray:['USA (FONOPS)','Japan','Australia']},
+tags:['Daily PH confrontations','UNCLOS illegal','Island building','US FONOPS'],
+countries:{hot:[],warm:['CHN','PHL'],cold:['VNM','MYS','IDN','JPN','USA','AUS']},
+timeline:[
+  {y:'2009',t:'China submits Nine-Dash Line map to UN — claiming 90% of South China Sea'},
+  {y:'2012-15',t:'China seizes Scarborough Shoal from Philippines. Builds artificial islands on reefs'},
+  {y:'2016',t:'UNCLOS Tribunal rules Nine-Dash Line has no legal basis. China ignores ruling'},
+  {y:'2019-22',t:'China militarizes islands with runways, missiles, radar. Philippines under Duterte accommodates'},
+  {y:'2023',t:'Marcos reverses course. Philippines allows US basing. Daily confrontations at Thomas Shoal'},
+  {y:'2024-26',t:'Water cannons, laser attacks, rammings. US and Philippine navies conduct joint patrols'}
+],
+mediation:'No formal mediation. ASEAN code of conduct talks with China ongoing for 20+ years with no result. China refuses third-party arbitration. Bilateral US-China dialogue includes SCS but yields no behavioral change.'},
+
+{id:'india_pak',name:'India–Pakistan Tensions',loc:'South Asia',i:'cold',since:'1947',
+desc:'The world\'s most dangerous nuclear flashpoint. India-Pakistan relations deteriorated sharply in 2025 after a terrorist attack on tourists in Kashmir (Pahalgam attack, April 2025) killing 26. India blamed Pakistan-based groups. Military build-up on both sides. Talks suspended.',
+parties:{red:['Pakistan (+ militant proxies)'],blue:['India'],gray:['USA (urging restraint)','China (Pakistan ally)']},
+tags:['⚠ Nuclear states','Pahalgam attack 2025','Escalation risk','Kashmir dispute'],
+countries:{hot:[],warm:['IND','PAK'],cold:['CHN']},
+timeline:[
+  {y:'1947',t:'Partition of British India. First Kashmir war. Line of Control established'},
+  {y:'1965/71',t:'Two more wars. 1971: Bangladesh created (East Pakistan). India wins decisively'},
+  {y:'1998',t:'Both nations test nuclear weapons. Nuclear deterrence established'},
+  {y:'1999',t:'Kargil War: Pakistan infiltrates Kashmir. India repels. Near-nuclear crisis'},
+  {y:'2016/19',t:'Uri attack, surgical strikes. Pulwama attack, air strikes. Near-war escalation'},
+  {y:'2025',t:'Pahalgam attack kills 26 tourists. India blames Pakistan. Military mobilization. Talks suspended'},
+  {y:'2026',t:'Tensions elevated. No war. Nuclear deterrence holding. US urges de-escalation'}
+],
+mediation:'USA urged restraint after Pahalgam. No formal mediation mechanism. UAE attempted back-channel dialogue. China called for restraint (while arming Pakistan). SCO framework provides a forum but no mediation occurred. Both sides remain at crisis-level tension.'},
+
+{id:'iran_nuclear',name:'Iran Nuclear Crisis',loc:'Middle East',i:'cold',since:'2002',
+desc:'Iran enriches uranium at 60-90% purity — the threshold for weapons-grade. After Israel struck Iranian air defenses in October 2024, Iran accelerated enrichment. New framework talks between US and Iran began in 2025 under Omani mediation.',
+parties:{red:['Iran'],blue:['USA','Israel'],gray:['EU3','Russia','China (blocking)','Oman (mediator)']},
+tags:['⚠ Nuclear breakout','Weeks from bomb','Israeli strikes','Oman mediation'],
+countries:{hot:[],warm:['IRN'],cold:['ISR','USA','SAU']},
+timeline:[
+  {y:'2002',t:'Iran\'s secret enrichment sites exposed. IAEA inspections begin'},
+  {y:'2006-10',t:'UN sanctions. Iran continues enrichment. Stuxnet cyberattack (US/Israel) damages centrifuges'},
+  {y:'2015',t:'JCPOA: Iran limits enrichment in exchange for sanctions relief'},
+  {y:'2018',t:'Trump withdraws from JCPOA. Iran gradually abandons limits'},
+  {y:'2023',t:'Iran enriches to 84% purity. Breakout time: 1-2 weeks. IAEA access limited'},
+  {y:'2024',t:'Israel strikes Iranian air defense sites (Oct). Iran retaliates with ballistic missiles'},
+  {y:'2025-26',t:'New framework talks via Oman. Iran demands security guarantees. No deal yet'}
+],
+mediation:'Oman-facilitated US-Iran indirect talks resumed 2025. Key sticking points: Iran demands security guarantee against regime change; US demands full enrichment halt; Israel reserves right to strike. EU3 (UK, France, Germany) involved. No deal as of early 2026.'},
+
+{id:'ukraine_ceasefire',name:'Israel–Lebanon Ceasefire',loc:'Middle East',i:'frozen',since:'Nov 27, 2024',
+desc:'The US-France brokered ceasefire between Israel and Hezbollah (Lebanon) took effect November 27, 2024 after Israel killed Nasrallah and degraded Hezbollah\'s arsenal. Lebanese Army deployed to south Lebanon. Hezbollah rebuilding. Ceasefire fragile but holding.',
+parties:{red:['Hezbollah (+Iran)'],blue:['Israel'],gray:['USA','France (guarantors)','Lebanese Army']},
+tags:['Nasrallah killed','Lebanese Army deploying','Iran proxy degraded','Fragile ceasefire'],
+countries:{hot:[],warm:['ISR'],cold:['LBN','IRN']},
+timeline:[
+  {y:'2006',t:'Hezbollah-Israel war. 1,200 Lebanese, 165 Israelis killed. UN Resolution 1701 — never implemented'},
+  {y:'2006-23',t:'Hezbollah builds massive arsenal (150,000 rockets). UN 1701 ignored. Israel accepts status quo'},
+  {y:'Oct 2023',t:'After Oct 7, Hezbollah opens "support front" — daily rocket exchanges. 60,000 displaced on both sides'},
+  {y:'Jul 2024',t:'Israel assassinates senior Hezbollah commanders. Escalation begins'},
+  {y:'Sep 2024',t:'Israel kills Nasrallah in Beirut strike. Pager/radio device attacks. Hezbollah leadership decimated'},
+  {y:'Oct 2024',t:'Israel invades south Lebanon. Hezbollah arsenal and tunnels largely destroyed'},
+  {y:'Nov 2024',t:'Ceasefire. Lebanese Army deploys south. Hezbollah degraded but rebuilding'}
+],
+mediation:'US-France brokered and guaranteed the ceasefire. A 60-day implementation period extended. Israel reserves right to strike Hezbollah rearmament. Lebanon demands full Israeli withdrawal from 5 remaining positions. UN UNIFIL monitoring but capacity limited.'},
+
+{id:'kashmir_frozen',name:'Transnistria Frozen Conflict',loc:'Eastern Europe',i:'frozen',since:'1992',
+desc:'Russian peacekeepers have maintained a frozen conflict in Moldovan territory for 30+ years. Since Ukraine cut Russian gas transit in January 2025, Transnistria faces energy crisis. Russian troops are isolated — the war in Ukraine has made resupply impossible.',
+parties:{red:['Transnistrian de facto state (+Russia)'],blue:['Moldova'],gray:['OSCE','EU (Moldova candidate)']},
+tags:['Russian troops isolated','Gas crisis (2025)','EU accession context','NATO-adjacent'],
+countries:{hot:[],warm:[],cold:['MDA','RUS_W','UKR']},
+timeline:[
+  {y:'1990',t:'Transnistria declares independence from Soviet Moldova. Armed conflict 1992'},
+  {y:'1992',t:'Ceasefire. Russian 14th Army stays as "peacekeepers." Conflict frozen'},
+  {y:'2003',t:'Kozak Memorandum (Russia-backed unification) rejected by Moldova under Western pressure'},
+  {y:'2022',t:'Ukraine war isolates Transnistria. Russian troops can\'t be reinforced'},
+  {y:'2025',t:'Ukraine ends Russian gas transit. Transnistria\'s power plant (ran on Russian gas) faces crisis'},
+  {y:'2026',t:'Transnistria negotiating with Moldova over energy. Russian leverage declining'}
+],
+mediation:'5+2 format (Moldova, Transnistria, OSCE, Russia, Ukraine + EU and USA as observers) has been frozen since 2022. Moldova has gained EU candidate status, strengthening its position. Energy crisis is creating unexpected pressure for resolution.'},
+
+{id:'wsahara',name:'Western Sahara Dispute',loc:'North Africa',i:'frozen',since:'1975',
+desc:'Morocco controls 80% of Western Sahara. The POLISARIO Front (backed by Algeria) declared end of ceasefire in 2020. US recognized Morocco\'s sovereignty in 2020 (Trump) — a status Biden maintained. Spain, France have moved toward recognizing Moroccan autonomy plan.',
+parties:{red:['Morocco'],blue:['POLISARIO Front (+Algeria)'],gray:['UN MINURSO','Spain (historical power)','ICJ']},
+tags:['US recognition 2020','Algerian-Moroccan rivalry','Phosphate resources','UN stalemate'],
+countries:{hot:[],warm:['MAR','DZA'],cold:['ESH']},
+timeline:[
+  {y:'1975',t:'Spain departs. Morocco invades (Green March). POLISARIO guerrilla war begins'},
+  {y:'1991',t:'UN-brokered ceasefire. Referendum on independence promised — never held'},
+  {y:'1991-2020',t:'Stalemate. Morocco builds sand wall (berm). POLISARIO in Tindouf, Algeria'},
+  {y:'2020',t:'POLISARIO ends ceasefire after Morocco acts in buffer zone. Trump recognizes Moroccan sovereignty'},
+  {y:'2022',t:'Algeria cuts diplomatic ties with Morocco over Western Sahara and other disputes'},
+  {y:'2026',t:'Morocco advances autonomy plan; Algeria backs POLISARIO. UN process deadlocked'}
+],
+mediation:'UN personal envoy Staffan de Mistura leads process — table talks but no breakthrough. Morocco offers autonomy plan (not independence). POLISARIO demands independence referendum. Algeria and Morocco\'s broader rivalry prevents resolution. MINURSO has no mandate to enforce anything.'}
+];
+
+let currentConflict=null;
+function hlConflict(cf){
+  clearHL();
+  if(currentConflict===cf.id){currentConflict=null;return}
+  currentConflict=cf.id;
+  const cls={hot:'conflict-hot',warm:'conflict-warm',cold:'conflict-cold',frozen:'conflict-frozen'};
+  const all=Object.entries(cf.countries);
+  all.forEach(([level,codes])=>{
+    codes.forEach(code=>{
+      document.querySelectorAll('#wmap path').forEach(p=>{
+        const id=p.id;
+        if(id===code||id.startsWith(code+'_')||
+           (code==='RUS'&&(id==='RUS_W'||id==='RUS_E'))||
+           (code==='IDN'&&id.startsWith('IDN'))||
+           (code==='USA'&&(id==='USA_C'||id==='AK'))||
+           (code==='CAN'&&id.startsWith('CAN'))||
+           (code==='JPN'&&id.startsWith('JPN'))||
+           (code==='NZL'&&id.startsWith('NZL'))||
+           (code==='MYS'&&id.startsWith('MYS'))){
+          p.classList.add(cls[level]);
+          aCodes.push(p);
+        }
+      });
+    });
+  });
+  // Scroll to map
+  document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+
+// Extended sidebar data for each conflict
+const CONFLICT_DETAIL = {
+  'ukr': {
+    why: `Russia launched this war to prevent Ukraine from joining NATO, to seize historically Russian-speaking eastern territories (Donbas), and to maintain a sphere of influence over former Soviet states. Putin argued Ukraine was not a legitimate independent nation. Ukraine had been moving toward EU and NATO integration since 2014.`,
+    now: `Russia controls roughly 20% of Ukraine. A grinding war of attrition continues along a 1,000km frontline. North Korea has deployed 10,000–15,000 troops to support Russian forces. Ukraine has struck deep inside Russian territory using long-range drones. As of 2026, US-brokered ceasefire talks are underway but no agreement has been reached.`,
+    diplomacy: [
+      {icon:'🇺🇸', text:'US-led Ramstein contact group coordinates military aid to Ukraine'},
+      {icon:'🇹🇷', text:'Turkey mediated the 2022 Black Sea grain deal (now collapsed)'},
+      {icon:'🕊️', text:'Trump administration pushing ceasefire talks with both sides — status uncertain'},
+      {icon:'🇨🇳', text:'China refuses arms transfers but opposes Western sanctions on Russia'},
+    ]
+  },
+  'gaza': {
+    why: `Hamas, the militant group governing Gaza, launched a shock attack on October 7, 2023 — killing ~1,200 Israelis and seizing ~250 hostages. This triggered Israel's invasion of Gaza. The root causes go deeper: decades of Israeli occupation, blockade of Gaza, and the unresolved Palestinian question for statehood.`,
+    now: `A Phase 1 ceasefire was agreed in January 2025. Some hostages were released in exchange for Palestinian prisoners. Phase 2 talks (aiming for permanent ceasefire) have stalled. Gaza has suffered catastrophic casualties — over 45,000 Palestinian deaths — and widespread famine due to blockade. Humanitarian aid flows remain severely restricted.`,
+    diplomacy: [
+      {icon:'🇶🇦', text:'Qatar hosts Hamas political leadership and is central mediator'},
+      {icon:'🇪🇬', text:'Egypt manages the Rafah crossing and mediates on humanitarian access'},
+      {icon:'🇺🇸', text:'US is key broker — pushing for Phase 2 deal covering permanent ceasefire and hostage release'},
+      {icon:'🇺🇳', text:'UN repeatedly calls for ceasefire and unrestricted humanitarian access'},
+    ]
+  },
+  'sudan': {
+    why: `The Sudanese Armed Forces (SAF) and the paramilitary Rapid Support Forces (RSF) were supposed to merge after the 2021 coup. A dispute over who would control the RSF — and who would dominate a future civilian government — collapsed into open war in April 2023.`,
+    now: `One of the world's worst humanitarian crises. The RSF controls Darfur and Khartoum was contested. Over 25 million people face acute food insecurity in what the UN calls the world's largest displacement crisis (8M+ internally displaced). Atrocities in Darfur are being described as genocide.`,
+    diplomacy: [
+      {icon:'🇸🇦', text:'Saudi Arabia and the US co-sponsored the Jeddah talks (collapsed in 2023)'},
+      {icon:'🇦🇺', text:'African Union has called for ceasefires repeatedly — no compliance'},
+      {icon:'🇺🇳', text:'UN emergency session — aid blocked by both parties; catastrophic access failures'},
+      {icon:'❌', text:'No active negotiations as of 2026. Both sides pursuing military victory.'},
+    ]
+  },
+  'drc': {
+    why: `Eastern DRC has been unstable since the 1994 Rwandan genocide. The M23 rebel group — backed by Rwanda — fights to control mineral-rich territories. Rwanda denies direct involvement but evidence of support is extensive. Competing armed groups, ethnic tensions, and state collapse fuel ongoing cycles of violence.`,
+    now: `M23 captured Goma (DRC's largest eastern city, pop. 2M) in January 2025 — a major escalation. The DRC and Rwanda are technically on the edge of interstate war. Over 7 million people are displaced in eastern DRC.`,
+    diplomacy: [
+      {icon:'🇦🇺', text:'African Union "Luanda Process" — Kenya, Angola mediating DRC-Rwanda dialogue'},
+      {icon:'🇺🇳', text:'MONUSCO (UN peacekeeping mission) is withdrawing — widely seen as failed'},
+      {icon:'🇪🇦', text:'East African Community (EAC) tried deploying regional force — withdrawn 2024'},
+      {icon:'⚠️', text:'Peace talks ongoing but M23 advances continue on the ground'},
+    ]
+  },
+  'yemen': {
+    why: `The Houthi movement (Ansar Allah) took control of Sanaa and much of Yemen in 2014-15, forcing the internationally recognized government to flee. Saudi Arabia intervened militarily in 2015 to restore the government, backed by UAE. The conflict has become a proxy war: Iran arms Houthis; Saudi/UAE fight back.`,
+    now: `A UN-brokered ceasefire from 2022 largely held on the ground war front. But in 2023, the Houthis began attacking commercial shipping in the Red Sea in solidarity with Gaza — triggering US-UK airstrikes on Houthi targets. The Red Sea crisis continues, disrupting ~12% of global trade. Houthis claim they will not stop until Gaza ceasefire.`,
+    diplomacy: [
+      {icon:'🇺🇳', text:'UN Special Envoy Hans Grundberg leads Yemen peace process — focus on ground war ceasefire'},
+      {icon:'🇸🇦', text:'Saudi Arabia held secret talks with Houthis in 2023 — tentative normalization'},
+      {icon:'🇴🇲', text:'Oman acts as back-channel between Houthis and Western parties'},
+      {icon:'🚢', text:'Red Sea shipping crisis separate track — no diplomatic resolution in sight'},
+    ]
+  },
+  'myanmar': {
+    why: `The military (Tatmadaw) launched a coup in February 2021, overthrowing the elected government of Aung San Suu Kyi. Pro-democracy forces formed the People's Defence Force (PDF) and allied with ethnic armed organizations (EAOs) that had fought the military for decades. By 2024, resistance forces have taken vast territory.`,
+    now: `The military junta has lost control of much of the country. The Three Brotherhood Alliance's Operation 1027 (Oct 2023) captured dozens of towns. The junta's territory is shrinking, centered on Naypyidaw and parts of lower Myanmar. Millions are displaced. The junta has begun conscription, showing weakness.`,
+    diplomacy: [
+      {icon:'🇦🇸', text:"ASEAN's 'Five-Point Consensus' peace plan is widely regarded as failed"},
+      {icon:'🇨🇳', text:'China brokers ceasefires between the junta and some EAOs to protect border trade'},
+      {icon:'🇺🇳', text:'UN Special Envoy in place but limited access to any party'},
+      {icon:'❌', text:'No meaningful peace process — military refuses to negotiate under current conditions'},
+    ]
+  },
+  'sahel': {
+    why: `Al-Qaeda affiliates (JNIM) and Islamic State (ISGS) exploit weak governance, ethnic grievances, and extreme poverty across Mali, Burkina Faso, Niger and Chad. French intervention began in 2013 but failed to stabilize the region. Military coups in Mali (2021), Burkina Faso (2022), Niger (2023) expelled French forces and invited Russian Wagner Group/Africa Corps.`,
+    now: `JNIM controls large swaths of central Mali and Burkina Faso. Civilian massacres are frequent. Burkina Faso is experiencing one of the world's worst food crises. Wagner/Africa Corps presence has deepened — with limited effectiveness. A new Sahel Alliance (Mali, Burkina, Niger) has formed, breaking from ECOWAS and France.`,
+    diplomacy: [
+      {icon:'🇷🇺', text:'Russia (Wagner/Africa Corps) is now the main military partner for junta governments'},
+      {icon:'🇪🇺', text:'EU suspended aid and missions after coups — limited engagement remains'},
+      {icon:'🌍', text:'ECOWAS imposed sanctions on coup governments — mostly ineffective'},
+      {icon:'❌', text:'No peace talks with jihadist groups — military approach predominates'},
+    ]
+  },
+  'somalia': {
+    why: `Al-Shabaab emerged from the collapse of Somalia's Islamic Courts Union (2006). It seeks to overthrow the Federal Government and impose strict Sharia law across Somalia. Extreme poverty, clan divisions, and state weakness allow it to survive and recruit.`,
+    now: `Al-Shabaab controls much of rural southern Somalia and conducts regular attacks on Mogadishu. The African Union Transition Mission (ATMIS) is withdrawing per schedule. The Somali National Army is not yet capable of holding territory on its own. Progress has been uneven.`,
+    diplomacy: [
+      {icon:'🇦🇺', text:'African Union ATMIS mission providing security — scheduled withdrawal by 2025'},
+      {icon:'🇺🇸', text:'US conducts airstrikes on al-Shabaab targets; ~500 troops deployed'},
+      {icon:'🇪🇺', text:'EU training Somali forces through EUTM Somalia mission'},
+      {icon:'🌍', text:'IGAD (regional bloc) coordinates broader Horn of Africa security'},
+    ]
+  },
+  'nigeria': {
+    why: `ISWAP (Islamic State West Africa Province) split from Boko Haram in 2016 and has become the dominant jihadist force in Lake Chad basin. It exploits poverty and marginalization of Muslim communities in northeast Nigeria. Herder-farmer conflicts across the Middle Belt add a separate layer of violence.`,
+    now: `ISWAP controls territory in Borno State and launches attacks across the Lake Chad basin (Nigeria, Niger, Chad, Cameroon). The Nigerian military has had some successes but the group remains resilient. Millions displaced in northeast Nigeria.`,
+    diplomacy: [
+      {icon:'🌍', text:'Multinational Joint Task Force (MNJTF) — Nigeria, Niger, Chad, Cameroon, Benin'},
+      {icon:'🇺🇸', text:'US provides intelligence and training support to Nigerian military'},
+      {icon:'❌', text:'No dialogue with ISWAP — designated terrorist organization'},
+    ]
+  },
+  'taiwan': {
+    why: `China regards Taiwan as a breakaway province that must eventually be "reunified" with the mainland — by force if necessary. Taiwan has governed itself as a democracy since 1949. The US maintains "strategic ambiguity" — selling arms to Taiwan but not formally committed to military defense. Taiwan's TSMC produces >90% of world's most advanced chips.`,
+    now: `China conducts regular military exercises around Taiwan. US arms sales continue at record pace. No active shooting — but military pressure is intense. Taiwan held presidential election in 2024 (Lai Ching-te won — Beijing dislikes him). US-China relations are managed carefully to avoid escalation.`,
+    diplomacy: [
+      {icon:'🇺🇸', text:'US-Taiwan Relations Act provides arms but no formal defense commitment'},
+      {icon:'🤝', text:'No direct Beijing-Taipei dialogue currently — relations frozen'},
+      {icon:'🌐', text:'G7 and like-minded states regularly affirm importance of Taiwan Strait peace'},
+      {icon:'⚠️', text:'Cross-strait communication channels (hotlines) have been cut by China'},
+    ]
+  },
+  'scs': {
+    why: `China claims ~90% of the South China Sea via the "nine-dash line" — rejected by a 2016 international tribunal. The Philippines, Vietnam, Malaysia, Brunei, Taiwan and Indonesia have overlapping claims. The sea carries ~$3.4 trillion in trade annually and sits atop disputed energy reserves.`,
+    now: `Chinese coast guard and militia vessels increasingly harass Philippine supply missions to Second Thomas Shoal. The US has reaffirmed the Mutual Defense Treaty with the Philippines covers South China Sea attacks. Vietnam quietly manages tensions. No military shooting but aggressive gray-zone tactics ongoing.`,
+    diplomacy: [
+      {icon:'🤝', text:'ASEAN-China Code of Conduct negotiations — ongoing but stalled for years'},
+      {icon:'🇵🇭', text:'Philippines has filed international arbitration cases against China'},
+      {icon:'🇺🇸', text:'US conducts Freedom of Navigation Operations (FONOPs) — China protests'},
+      {icon:'🌐', text:'No multilateral resolution in sight — bilaterals managed case by case'},
+    ]
+  },
+  'india_pak': {
+    why: `India and Pakistan have fought three wars over Kashmir since 1947 partition. Pakistan-backed militant groups have conducted attacks inside India. India revoked Jammu & Kashmir's special status in 2019. Both sides are nuclear-armed.`,
+    now: `A major terrorist attack in Pahalgam, Kashmir in April 2025 killed 26 Hindu tourists. India blamed Pakistan-linked militants. India launched precision strikes inside Pakistan (Operation Sindoor, May 2025). Pakistan retaliated. A US-brokered ceasefire stopped full-scale war — but tensions remain extremely high as of 2026.`,
+    diplomacy: [
+      {icon:'🇺🇸', text:'US Secretary of State brokered emergency ceasefire after Operation Sindoor (2025)'},
+      {icon:'🇸🇦', text:'Saudi Arabia and UAE offered mediation — accepted by both sides for ceasefire'},
+      {icon:'❄️', text:'All diplomatic ties suspended — no ambassadors, trade halted, Indus Waters Treaty suspended'},
+      {icon:'⚠️', text:'Post-ceasefire — no talks on root causes. Both sides in hostile standoff.'},
+    ]
+  },
+  'iran_nuclear': {
+    why: `Iran has been developing nuclear enrichment capabilities since the 1980s. The West fears Iran seeks nuclear weapons capability. Iran insists it is for peaceful energy. The 2015 JCPOA deal capped enrichment — the US withdrew under Trump in 2018, Iran then progressively violated limits.`,
+    now: `Iran is enriching uranium to 60% purity (weapons-grade is 90%). IAEA inspectors have limited access. A new JCPOA-style deal is discussed but no agreement. Israel has conducted strikes on Iranian nuclear-linked facilities. Iran has sent ballistic missiles at Israel (twice — April and October 2024).`,
+    diplomacy: [
+      {icon:'🌐', text:'P5+1 (US, UK, France, Russia, China + Germany) format — not currently meeting'},
+      {icon:'🇴🇲', text:'Oman facilitates back-channel US-Iran contacts'},
+      {icon:'🇺🇳', text:'IAEA inspections ongoing but severely curtailed — monitoring gaps'},
+      {icon:'⚠️', text:'No deal in sight. Maximum pressure sanctions regime by US ongoing.'},
+    ]
+  },
+  'ukraine_ceasefire': {
+    why: `Israel-Lebanon (Hezbollah) conflict escalated severely in 2024 following Lebanon-based Hezbollah attacks linked to the Gaza war. Israel launched ground operations in southern Lebanon in late 2024. A US-brokered ceasefire came into effect November 2024.`,
+    now: `Ceasefire holding — but fragile. Lebanon's new president Joseph Aoun elected January 2025. Lebanese army deploying to south Lebanon per ceasefire terms. Israel has not fully withdrawn from all positions. Hezbollah significantly weakened — most top leadership killed by Israel in 2024.`,
+    diplomacy: [
+      {icon:'🇺🇸', text:'US brokered the November 2024 ceasefire — monitoring compliance'},
+      {icon:'🇫🇷', text:'France co-guarantor of ceasefire with US'},
+      {icon:'🇱🇧', text:'Lebanon army deploying south — international community funding expansion'},
+      {icon:'🕊️', text:'Ceasefire holding but Hezbollah rearmament concerns remain'},
+    ]
+  },
+  'wsahara': {
+    why: `Spain withdrew from Western Sahara in 1975. Morocco claimed the territory. The Polisario Front (backed by Algeria) fought for independence. A 1991 UN ceasefire froze the conflict — a referendum on independence was promised but never held. The territory's phosphate and fishing resources are contested.`,
+    now: `Morocco controls ~80% of Western Sahara and has built a sand wall (berm) separating it from Polisario-held territory. Low-level hostilities resumed in 2020. The US recognized Moroccan sovereignty in 2020. Spain and France have tilted toward Morocco. Algeria continues to back Polisario.`,
+    diplomacy: [
+      {icon:'🇺🇳', text:"UN Special Envoy Staffan de Mistura leads 'round table' talks — no breakthrough"},
+      {icon:'🇺🇸', text:'US recognized Moroccan sovereignty over Western Sahara in 2020'},
+      {icon:'🇩🇿', text:'Algeria-Morocco relations severed — Algeria key obstacle to settlement'},
+      {icon:'❄️', text:'Conflict frozen — no referendum, no independence, no resolution in sight'},
+    ]
+  },
+  'kashmir_frozen': {
+    why: '',
+    now: '',
+    diplomacy: []
+  }
+};
+
+// ═══ CONFLICT SIDEBAR LOGIC ═══
+let sidebarOpen = false;
+let currentSidebarConflict = null;
+let tlOpen = false;
+
+function openSidebar(cf) {
+  const detail = CONFLICT_DETAIL[cf.id] || {};
+  const sb = document.getElementById('conflict-sidebar');
+  
+  // Set intensity class
+  sb.className = cf.i;
+  
+  // Header
+  const iLabels = {hot:'🔴 HOT — ACTIVE COMBAT',warm:'🟠 WARM — LOW INTENSITY',cold:'🟡 COLD — SIMMERING',frozen:'🔵 FROZEN DISPUTE'};
+  document.getElementById('csb-intensity').textContent = iLabels[cf.i] || cf.i.toUpperCase();
+  document.getElementById('csb-title').textContent = cf.name;
+  document.getElementById('csb-loc').textContent = '◈ ' + cf.loc + ' — SINCE ' + cf.since;
+  
+  // Body
+  let body = '';
+  
+  // Parties
+  const redP = (cf.parties.red||[]).map(p=>`<span class="csb-party r">${p}</span>`).join('');
+  const blueP = (cf.parties.blue||[]).map(p=>`<span class="csb-party b">${p}</span>`).join('');
+  const grayP = (cf.parties.gray||[]).map(p=>`<span class="csb-party g">${p}</span>`).join('');
+  body += `<div class="csb-section"><div class="csb-section-title">// BELLIGERENTS &amp; ACTORS</div><div class="csb-parties">${redP}${blueP}${grayP}</div></div>`;
+  
+  // WHY
+  if (detail.why) {
+    body += `<div class="csb-section csb-why"><div class="csb-section-title">// WHY IS THIS HAPPENING</div><div class="csb-text">${detail.why}</div></div>`;
+  }
+  
+  // WHAT NOW
+  const nowText = detail.now || cf.desc;
+  body += `<div class="csb-section csb-now"><div class="csb-section-title">// SITUATION RIGHT NOW</div><div class="csb-text">${nowText}</div></div>`;
+  
+  // DIPLOMACY
+  body += `<div class="csb-section csb-dip"><div class="csb-section-title">// NEGOTIATIONS &amp; INTERNATIONAL EFFORTS</div>`;
+  if (detail.diplomacy && detail.diplomacy.length > 0) {
+    detail.diplomacy.forEach(d => {
+      body += `<div class="dip-item"><span class="dip-icon">${d.icon}</span><span class="dip-text">${d.text}</span></div>`;
+    });
+  } else {
+    body += `<div class="dip-none">NO ACTIVE NEGOTIATIONS</div>`;
+  }
+  body += `</div>`;
+  
+  document.getElementById('csb-body').innerHTML = body;
+  
+  // Timeline
+  let tlHtml = '';
+  if (cf.timeline && cf.timeline.length > 0) {
+    cf.timeline.forEach((ev, i) => {
+      const isMajor = ev.major || false;
+      tlHtml += `
+        <div class="tl-event">
+          <div class="tl-year">${ev.y}</div>
+          <div class="tl-bar">
+            <div class="tl-dot-line">
+              <div class="tl-dot${isMajor?' major':''}"></div>
+              <div class="tl-event-text">${ev.t}</div>
+            </div>
+            ${ev.flag ? '<span class="tl-flag">⚑ ' + ev.flag + '</span>' : ''}
+          </div>
+        </div>`;
+    });
+  } else {
+    tlHtml = '<div class="csb-text" style="opacity:.5">Timeline data not available.</div>';
+  }
+  document.getElementById('csb-tl-inner').innerHTML = tlHtml;
+  
+  // Reset timeline state
+  tlOpen = false;
+  document.getElementById('csb-timeline').classList.remove('open');
+  document.getElementById('csb-tl-btn').classList.remove('open');
+  
+  // Open sidebar
+  sb.classList.add('open');
+  sidebarOpen = true;
+  currentSidebarConflict = cf.id;
+}
+
+function closeSidebar() {
+  document.getElementById('conflict-sidebar').classList.remove('open');
+  sidebarOpen = false;
+  currentSidebarConflict = null;
+  tlOpen = false;
+}
+
+function toggleSidebarTL() {
+  tlOpen = !tlOpen;
+  document.getElementById('csb-timeline').classList.toggle('open', tlOpen);
+  document.getElementById('csb-tl-btn').classList.toggle('open', tlOpen);
+}
+
+// Close on ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeSidebar();
+    closeC();
+  }
+});
+
+function buildConflicts(){
+  const g=document.getElementById('cgrid');
+  const bl={hot:'bh',warm:'bw',cold:'bc',frozen:'bf'};
+  const ll={hot:'🔴 HOT',warm:'🟠 WARM',cold:'🟡 COLD',frozen:'🔵 FROZEN'};
+  CONFLICTS.forEach((c,idx)=>{
+    const par=(c.parties.red||[]).map(p=>`<span class="cpt r">${p}</span>`).join('')+
+              (c.parties.blue||[]).map(p=>`<span class="cpt b">${p}</span>`).join('')+
+              (c.parties.gray||[]).map(p=>`<span class="cpt g">${p}</span>`).join('');
+    const tags=(c.tags||[]).map(t=>`<span class="cm">${t}</span>`).join('');
+    const div=document.createElement('div');
+    div.className=`cc ${c.i}`;
+    div.innerHTML=`
+      <div class="cc-i ${bl[c.i]}">${ll[c.i]}</div>
+      <div class="cc-name">${c.name}</div>
+      <div class="cc-loc">◈ ${c.loc} — Since ${c.since}</div>
+      <div class="ccpar"><div class="cplist">${par}</div></div>
+      <div class="cc-tags">${tags}</div>
+      <div class="cc-action-hint">▸ CLICK TO OPEN INTEL PANEL</div>`;
+    div.onclick=()=>{
+      hlConflict(c);
+      openSidebar(c);
+      // Smooth scroll to map
+      document.getElementById('theater').scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    g.appendChild(div);
+  });
+}
+function toggleTL(id){const el=document.getElementById(id);el.classList.toggle('open')}
+buildConflicts();
+</script>
+
+<!-- CONFLICT SIDEBAR PANEL -->
+<div id="conflict-sidebar">
+  <div class="csb-header">
+    <span class="csb-close" onclick="closeSidebar()">[ × CLOSE ]</span>
+    <div class="csb-intensity" id="csb-intensity">● HOT</div>
+    <div class="csb-title" id="csb-title">—</div>
+    <div class="csb-loc" id="csb-loc">—</div>
+  </div>
+  <div class="csb-body" id="csb-body">
+    <!-- Filled dynamically -->
+  </div>
+  <div class="csb-tl-btn" id="csb-tl-btn" onclick="toggleSidebarTL()">
+    <span>▸ VIEW CONFLICT HISTORY &amp; TIMELINE</span>
+    <span class="tl-arrow">▶</span>
+  </div>
+  <div class="csb-timeline" id="csb-timeline">
+    <div class="tl-inner" id="csb-tl-inner">
+      <!-- Filled dynamically -->
+    </div>
+  </div>
+</div>
+
+</body></html>
